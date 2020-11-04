@@ -19,8 +19,6 @@ object LoadSaveWidePotions {
                 if (realPotion != null) {
                     return SpireReturn.Return(WidePotion(realPotion))
                 }
-            } else if (name.startsWith("wideright:")) {
-                return SpireReturn.Return(null)
             }
         }
         return SpireReturn.Continue()

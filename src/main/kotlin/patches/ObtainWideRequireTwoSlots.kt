@@ -62,6 +62,9 @@ object ObtainWideRequireTwoSlots {
                 __instance.potions.addAll(newPotions)
                 __instance.potions.forEachIndexed { i, p ->
                     p.slot = i
+                    if (p is WidePotion) {
+                        p.potion.slot = i
+                    }
                 }
                 __instance.adjustPotionPositions()
 
