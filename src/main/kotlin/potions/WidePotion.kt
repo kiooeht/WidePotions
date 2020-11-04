@@ -2,12 +2,11 @@ package com.evacipated.cardcrawl.mod.widepotions.potions
 
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
-import com.evacipated.cardcrawl.mod.widepotions.extensions.setPrivate
+import com.evacipated.cardcrawl.mod.widepotions.patches.WidePotency
 import com.megacrit.cardcrawl.core.AbstractCreature
 import com.megacrit.cardcrawl.core.CardCrawlGame
 import com.megacrit.cardcrawl.core.Settings
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon
-import com.megacrit.cardcrawl.helpers.PowerTip
 import com.megacrit.cardcrawl.localization.PotionStrings
 import com.megacrit.cardcrawl.potions.AbstractPotion
 import com.megacrit.cardcrawl.ui.panels.TopPanel
@@ -46,15 +45,15 @@ class WidePotion private constructor(
 
     override fun initializeData() {
         if (initialized) {
+            WidePotency.isWidePotion = this
             potion.initializeData()
-
-            potency = getPotency()
-            potion.setPrivate("potency", potency, AbstractPotion::class.java)
+            WidePotency.isWidePotion = null
             description = potion.description
             tips.clear()
             tips.addAll(potion.tips)
-            tips.removeAt(0)
-            tips.add(0, PowerTip(name, description))
+            if (tips.isNotEmpty() && tips[0].header == potion.name) {
+                tips[0].header = name
+            }
         }
     }
 
