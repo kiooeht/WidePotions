@@ -15,17 +15,9 @@
         <SlayTheSpire.version>07-30-2020</SlayTheSpire.version>
         <ModTheSpire.version>3.17.0</ModTheSpire.version>
 
-        <kotlin.version>1.4.0</kotlin.version>
+        <kotlin.version>1.4.10</kotlin.version>
         <kotlin.compiler.incremental>true</kotlin.compiler.incremental>
     </properties>
-
-    <repositories>
-        <repository>
-            <id>bintray</id>
-            <name>bintray</name>
-            <url>http://jcenter.bintray.com</url>
-        </repository>
-    </repositories>
 
     <dependencies>
         <dependency>
@@ -38,12 +30,6 @@
             <artifactId>kotlin-reflect</artifactId>
             <version>${kotlin.version}</version>
         </dependency>
-        <dependency>
-            <groupId>org.funktionale</groupId>
-            <artifactId>funktionale-partials</artifactId>
-            <version>1.2</version>
-        </dependency>
-
 
         <dependency>
             <groupId>com.megacrit.cardcrawl</groupId>
