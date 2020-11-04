@@ -1,0 +1,139 @@
+package com.evacipated.cardcrawl.mod.widepotions.potions
+
+import com.badlogic.gdx.graphics.Color
+import com.badlogic.gdx.graphics.g2d.SpriteBatch
+import com.evacipated.cardcrawl.mod.widepotions.extensions.setPrivate
+import com.megacrit.cardcrawl.core.AbstractCreature
+import com.megacrit.cardcrawl.core.CardCrawlGame
+import com.megacrit.cardcrawl.core.Settings
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon
+import com.megacrit.cardcrawl.helpers.PowerTip
+import com.megacrit.cardcrawl.localization.PotionStrings
+import com.megacrit.cardcrawl.potions.AbstractPotion
+import com.megacrit.cardcrawl.ui.panels.TopPanel
+import kotlin.math.ceil
+import kotlin.math.floor
+
+class WidePotion private constructor(
+    private val potion: AbstractPotion,
+    private val right: Boolean
+) : AbstractPotion(
+    "[MISSING NAME]",
+    makeID(potion.ID, right),
+    potion.rarity,
+    potion.size,
+    potion.color
+) {
+    constructor(potion: AbstractPotion) : this(potion, false)
+
+    private var initialized = false
+    private val strings: PotionStrings
+    @JvmField
+    var otherHalf: WidePotion? = null
+
+    init {
+        initialized = true
+        strings = CardCrawlGame.languagePack.getPotionString("wide:WidePotion")
+        name = strings.NAME.format(potion.name)
+        initializeData()
+
+        if (right) {
+            hb.resize(0f, 0f)
+        } else {
+            hb.resize(hb.width * 2, hb.height)
+        }
+    }
+
+    override fun initializeData() {
+        if (initialized) {
+            potion.initializeData()
+
+            potency = getPotency()
+            potion.setPrivate("potency", potency, AbstractPotion::class.java)
+            description = potion.description
+            tips.clear()
+            tips.addAll(potion.tips)
+            tips.removeAt(0)
+            tips.add(0, PowerTip(name, description))
+        }
+    }
+
+    override fun use(target: AbstractCreature?) {
+        potion.use(target)
+    }
+
+    override fun getPotency(ascensionLevel: Int): Int =
+        if (initialized) {
+            val origPotency = potion.getPotency(ascensionLevel)
+            val double = origPotency * 2
+            val roundUp = ceil(origPotency * 2.5f).toInt()
+            val roundDown = floor(origPotency * 2.5f).toInt()
+            if (roundDown == double) {
+                roundUp
+            } else {
+                roundDown
+            }
+        } else {
+            0
+        }
+
+    override fun makeCopy(): AbstractPotion =
+        WidePotion(potion.makeCopy())
+
+    override fun setAsObtained(potionSlot: Int) {
+        super.setAsObtained(potionSlot)
+
+        if (!right) {
+            otherHalf = WidePotion(potion.makeCopy(), true)
+            otherHalf?.otherHalf = this
+            AbstractDungeon.player.obtainPotion(potionSlot + 1, otherHalf)
+        }
+    }
+
+    override fun adjustPosition(slot: Int) {
+        super.adjustPosition(slot)
+
+        if (right) {
+            hb.move(-500f, -500f)
+        } else {
+            hb.move(TopPanel.potionX + (slot + 0.5f) * Settings.POTION_W, posY)
+        }
+    }
+
+    override fun renderLightOutline(sb: SpriteBatch?) {
+        if (!right) super.renderLightOutline(sb)
+    }
+
+    override fun renderOutline(sb: SpriteBatch?) {
+        if (!right) super.renderOutline(sb)
+    }
+
+    override fun renderOutline(sb: SpriteBatch?, c: Color?) {
+        if (!right) super.renderOutline(sb, c)
+    }
+
+    override fun renderShiny(sb: SpriteBatch?) {
+        if (!right) super.renderShiny(sb)
+    }
+
+    override fun render(sb: SpriteBatch?) {
+        if (!right) super.render(sb)
+    }
+
+    override fun shopRender(sb: SpriteBatch?) {
+        if (!right) super.shopRender(sb)
+    }
+
+    override fun labRender(sb: SpriteBatch?) {
+        if (!right) super.labRender(sb)
+    }
+
+    companion object {
+        private fun makeID(id: String, right: Boolean): String =
+            if (right) {
+                "wideright:$id"
+            } else {
+                "wide:$id"
+            }
+    }
+}
