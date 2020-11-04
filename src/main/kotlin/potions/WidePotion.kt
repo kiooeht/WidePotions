@@ -8,7 +8,7 @@ import com.megacrit.cardcrawl.core.CardCrawlGame
 import com.megacrit.cardcrawl.core.Settings
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon
 import com.megacrit.cardcrawl.localization.PotionStrings
-import com.megacrit.cardcrawl.potions.AbstractPotion
+import com.megacrit.cardcrawl.potions.*
 import com.megacrit.cardcrawl.ui.panels.TopPanel
 import kotlin.math.ceil
 import kotlin.math.floor
@@ -134,5 +134,14 @@ class WidePotion private constructor(
             } else {
                 "wide:$id"
             }
+
+        val whitelist = listOf(
+            StrengthPotion.POTION_ID,
+            DexterityPotion.POTION_ID,
+            BlockPotion.POTION_ID,
+            FairyPotion.POTION_ID,
+            FirePotion.POTION_ID,
+            ExplosivePotion.POTION_ID
+        )
     }
 }
