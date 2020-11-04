@@ -51,6 +51,14 @@ class WidePotion(
         potion.use(target)
     }
 
+    override fun canUse(): Boolean {
+        return potion.canUse()
+    }
+
+    override fun canDiscard(): Boolean {
+        return potion.canDiscard()
+    }
+
     override fun getPotency(ascensionLevel: Int): Int =
         if (initialized) {
             val origPotency = potion.getPotency(ascensionLevel)
