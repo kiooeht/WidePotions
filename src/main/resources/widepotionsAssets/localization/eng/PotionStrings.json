@@ -22,5 +22,8 @@
     "DESCRIPTIONS": [
       "This turn, your next #b%1$d cards are played twice."
     ]
+  },
+  "${ModID}:FairyPotion": {
+    "NAME": "Fairy Queen in a Bottle"
   }
 }
