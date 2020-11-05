@@ -19,7 +19,7 @@ class WidePotion(
     potion.rarity,
     potion.size,
     potion.color
-) {
+), IsWidePotion {
     private var initialized = false
     private val strings: PotionStrings
     val otherHalf: WidePotionRightHalf = WidePotionRightHalf(this)
@@ -106,6 +106,9 @@ class WidePotion(
             FairyPotion.POTION_ID,
             FirePotion.POTION_ID,
             ExplosivePotion.POTION_ID
+        )
+
+        val whitemap = mapOf<String, () -> AbstractPotion>(
         )
     }
 }

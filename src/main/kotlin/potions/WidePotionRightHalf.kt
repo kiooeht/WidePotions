@@ -6,7 +6,7 @@ import com.megacrit.cardcrawl.core.AbstractCreature
 import com.megacrit.cardcrawl.potions.AbstractPotion
 
 class WidePotionRightHalf(
-    val otherHalf: WidePotion
+    val otherHalf: AbstractPotion
 ) : AbstractPotion(
     "",
     "",
