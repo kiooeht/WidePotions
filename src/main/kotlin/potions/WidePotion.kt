@@ -131,6 +131,7 @@ class WidePotion(
             LiquidBronze.POTION_ID,
             DistilledChaosPotion.POTION_ID,
             LiquidMemories.POTION_ID,
+            SwiftPotion.POTION_ID,
         )
 
         val whitemap = mapOf<String, () -> AbstractPotion>(
