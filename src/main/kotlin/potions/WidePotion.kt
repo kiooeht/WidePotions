@@ -42,7 +42,7 @@ class WidePotion(
             }
         }
         if (!customName) {
-            val wideStrings = CardCrawlGame.languagePack.getPotionString("wide:WidePotion")
+            val wideStrings = CardCrawlGame.languagePack.getPotionString(WidePotionsMod.makeID("WidePotion"))
             name = wideStrings.NAME.format(potion.name)
         }
 

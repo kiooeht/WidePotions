@@ -1,5 +1,5 @@
 {
-  "wide:WidePotion": {
+  "${ModID}:WidePotion": {
     "NAME": "Wide %1$s"
   },
   "${ModID}:Weak Potion": {

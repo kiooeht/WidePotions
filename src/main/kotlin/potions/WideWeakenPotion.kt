@@ -13,7 +13,7 @@ import com.megacrit.cardcrawl.ui.panels.TopPanel
 
 class WideWeakenPotion : WeakenPotion(), IsWidePotion {
     init {
-        val strings = CardCrawlGame.languagePack.getPotionString("wide:WidePotion")
+        val strings = CardCrawlGame.languagePack.getPotionString(WidePotionsMod.makeID("WidePotion"))
         name = strings.NAME.format(name)
 
         isThrown = true
