@@ -26,6 +26,7 @@ class WidePotion(
 ), IsWidePotion {
     private var initialized = false
     val otherHalf: WidePotionRightHalf = WidePotionRightHalf(this)
+    private var customDescription: String? = null
 
     init {
         setPrivateFinal("color", potion.color, AbstractPotion::class.java)
@@ -42,6 +43,9 @@ class WidePotion(
             if (strings.NAME != null) {
                 name = strings.NAME
                 customName = true
+            }
+            if (strings.DESCRIPTIONS != null) {
+                customDescription = strings.DESCRIPTIONS[0]
             }
         }
         if (!customName) {
@@ -62,11 +66,19 @@ class WidePotion(
             WidePotency.isWidePotion = this
             potion.initializeData()
             WidePotency.isWidePotion = null
-            description = potion.description
+            if (customDescription != null) {
+                description = customDescription!!.format(potion.getPrivate<Int>("potency", AbstractPotion::class.java))
+                potion.description = description
+            } else {
+                description = potion.description
+            }
             tips.clear()
             tips.addAll(potion.tips)
             if (tips.isNotEmpty() && tips[0].header == potion.name) {
                 tips[0].header = name
+                if (customDescription != null) {
+                    tips[0].body = description
+                }
             }
         }
     }
