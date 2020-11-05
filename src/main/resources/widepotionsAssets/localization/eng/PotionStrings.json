@@ -26,5 +26,8 @@
   },
   "${ModID}:FairyPotion": {
     "NAME": "Fairy Queen in a Bottle"
+  },
+  "${ModID}:SneckoOil": {
+    "NAME": "Grand Snecko Oil"
   }
 }
