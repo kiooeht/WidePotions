@@ -7,7 +7,6 @@ import com.megacrit.cardcrawl.core.AbstractCreature
 import com.megacrit.cardcrawl.core.CardCrawlGame
 import com.megacrit.cardcrawl.core.Settings
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon
-import com.megacrit.cardcrawl.localization.PotionStrings
 import com.megacrit.cardcrawl.potions.*
 import com.megacrit.cardcrawl.ui.panels.TopPanel
 import kotlin.math.ceil
@@ -16,7 +15,7 @@ import kotlin.math.floor
 class WidePotion(
     val potion: AbstractPotion
 ) : AbstractPotion(
-    "[MISSING NAME]",
+    "[MISSING_NAME]",
     makeID(potion.ID),
     potion.rarity,
     potion.size,
@@ -33,15 +32,11 @@ class WidePotion(
         spotsColor = potion.spotsColor
 
         initialized = true
-        var customName = false
-        val strings: PotionStrings? = CardCrawlGame.languagePack.getPotionString(WidePotionsMod.makeID(ID))
-        if (strings != null) {
-            if (strings.NAME != null) {
-                name = strings.NAME
-                customName = true
-            }
+        val strings = CardCrawlGame.languagePack.getPotionString(WidePotionsMod.makeID(ID))
+        if (strings.NAME != null) {
+            name = strings.NAME
         }
-        if (!customName) {
+        if (name == "[MISSING_NAME]") {
             val wideStrings = CardCrawlGame.languagePack.getPotionString(WidePotionsMod.makeID("WidePotion"))
             name = wideStrings.NAME.format(potion.name)
         }
