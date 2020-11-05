@@ -17,7 +17,7 @@ import com.megacrit.cardcrawl.rewards.RewardItem
 object WideRewards {
     @JvmStatic
     fun Prefix(__instance: RewardItem, @ByRef potion: Array<AbstractPotion>) {
-        if (potion[0].canBeWide() && AbstractDungeon.potionRng.randomBoolean(WidePotionsMod.wideChance)) {
+        if (potion[0].canBeWide() && AbstractDungeon.potionRng.randomBoolean(WidePotionsMod.wideChance())) {
             potion[0] = potion[0].makeWide()
         }
     }

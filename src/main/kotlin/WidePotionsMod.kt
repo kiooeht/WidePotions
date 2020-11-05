@@ -9,6 +9,7 @@ import basemod.interfaces.PostInitializeSubscriber
 import com.evacipated.cardcrawl.mod.widepotions.extensions.isWide
 import com.evacipated.cardcrawl.mod.widepotions.extensions.makeWide
 import com.evacipated.cardcrawl.mod.widepotions.helpers.AssetLoader
+import com.evacipated.cardcrawl.modthespire.lib.SpireConfig
 import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer
 import com.megacrit.cardcrawl.core.Settings
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon
@@ -29,7 +30,7 @@ class WidePotionsMod :
         val NAME: String
 
         val assets = AssetLoader()
-        var wideChance = 0.2f
+        private var config: SpireConfig? = null
 
         init {
             var tmpID = "widepotions"
@@ -50,10 +51,26 @@ class WidePotionsMod :
         @JvmStatic
         fun initialize() {
             BaseMod.subscribe(WidePotionsMod())
+
+            try {
+                val defaults = Properties()
+                defaults["WideChance"] = 0.2f.toString()
+                config = SpireConfig(ID, "config", defaults)
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
         }
 
         fun makeID(id: String) = "$ID:$id"
         fun assetPath(path: String) = "${ID}Assets/$path"
+
+        fun wideChance(): Float {
+            return if (config != null) {
+                config!!.getFloat("WideChance")
+            } else {
+                0.2f
+            }
+        }
     }
 
     override fun receivePostInitialize() {
@@ -67,11 +84,18 @@ class WidePotionsMod :
             700f,
             5f,
             100f,
-            wideChance * 100f,
+            wideChance() * 100f,
             "%.0f%%",
             settingsPanel
         ) { slider ->
-            wideChance = slider.value / 100f
+            if (config != null) {
+                config!!.setFloat("WideChance", slider.value / 100f)
+                try {
+                    config!!.save()
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+            }
         }
         settingsPanel.addUIElement(chanceSlider)
 
