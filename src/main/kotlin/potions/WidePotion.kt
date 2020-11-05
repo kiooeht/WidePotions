@@ -1,5 +1,6 @@
 package com.evacipated.cardcrawl.mod.widepotions.potions
 
+import com.evacipated.cardcrawl.mod.widepotions.WidePotionsMod
 import com.evacipated.cardcrawl.mod.widepotions.extensions.setPrivateFinal
 import com.evacipated.cardcrawl.mod.widepotions.patches.WidePotency
 import com.megacrit.cardcrawl.core.AbstractCreature
@@ -22,7 +23,6 @@ class WidePotion(
     potion.color
 ), IsWidePotion {
     private var initialized = false
-    private val strings: PotionStrings
     val otherHalf: WidePotionRightHalf = WidePotionRightHalf(this)
 
     init {
@@ -33,8 +33,18 @@ class WidePotion(
         spotsColor = potion.spotsColor
 
         initialized = true
-        strings = CardCrawlGame.languagePack.getPotionString("wide:WidePotion")
-        name = strings.NAME.format(potion.name)
+        var customName = false
+        val strings: PotionStrings? = CardCrawlGame.languagePack.getPotionString(WidePotionsMod.makeID(ID))
+        if (strings != null) {
+            if (strings.NAME != null) {
+                name = strings.NAME
+                customName = true
+            }
+        }
+        if (!customName) {
+            val wideStrings = CardCrawlGame.languagePack.getPotionString("wide:WidePotion")
+            name = wideStrings.NAME.format(potion.name)
+        }
 
         isThrown = potion.isThrown
         targetRequired = potion.targetRequired
