@@ -157,13 +157,13 @@ class WidePotion(
             DistilledChaosPotion.POTION_ID,
             LiquidMemories.POTION_ID,
             SwiftPotion.POTION_ID,
+            DuplicationPotion.POTION_ID,
         )
 
         val whitemap = mapOf<String, () -> AbstractPotion>(
             WeakenPotion.POTION_ID to ::WideWeakenPotion,
             FearPotion.POTION_ID to ::WideFearPotion,
             BlessingOfTheForge.POTION_ID to ::WideBlessingOfTheForge,
-            DuplicationPotion.POTION_ID to ::WideDuplicationPotion,
         )
     }
 }
