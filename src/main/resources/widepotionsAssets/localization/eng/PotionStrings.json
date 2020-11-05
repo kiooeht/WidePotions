@@ -16,5 +16,10 @@
     "DESCRIPTIONS": [
       "Upgrade ALL your cards for the rest of the combat."
     ]
+  },
+  "${ModID}:DuplicationPotion": {
+    "DESCRIPTIONS": [
+      "This turn, your next #b%1$d cards are played twice."
+    ]
   }
 }
