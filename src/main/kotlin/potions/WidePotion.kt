@@ -1,5 +1,6 @@
 package com.evacipated.cardcrawl.mod.widepotions.potions
 
+import com.evacipated.cardcrawl.mod.widepotions.extensions.setPrivateFinal
 import com.evacipated.cardcrawl.mod.widepotions.patches.WidePotency
 import com.megacrit.cardcrawl.core.AbstractCreature
 import com.megacrit.cardcrawl.core.CardCrawlGame
@@ -25,6 +26,12 @@ class WidePotion(
     val otherHalf: WidePotionRightHalf = WidePotionRightHalf(this)
 
     init {
+        setPrivateFinal("color", potion.color, AbstractPotion::class.java)
+        setPrivateFinal("p_effect", potion.p_effect, AbstractPotion::class.java)
+        liquidColor = potion.liquidColor
+        hybridColor = potion.hybridColor
+        spotsColor = potion.spotsColor
+
         initialized = true
         strings = CardCrawlGame.languagePack.getPotionString("wide:WidePotion")
         name = strings.NAME.format(potion.name)
