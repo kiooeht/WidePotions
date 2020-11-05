@@ -105,7 +105,20 @@ class WidePotion(
             BlockPotion.POTION_ID,
             FairyPotion.POTION_ID,
             FirePotion.POTION_ID,
-            ExplosivePotion.POTION_ID
+            ExplosivePotion.POTION_ID,
+            SneckoOil.POTION_ID,
+            AncientPotion.POTION_ID,
+            EnergyPotion.POTION_ID,
+            FruitJuice.POTION_ID,
+            BloodPotion.POTION_ID,
+            PoisonPotion.POTION_ID,
+            FocusPotion.POTION_ID,
+            BottledMiracle.POTION_ID,
+            HeartOfIron.POTION_ID,
+            GhostInAJar.POTION_ID,
+            RegenPotion.POTION_ID,
+            SpeedPotion.POTION_ID,
+            SteroidPotion.POTION_ID,
         )
 
         val whitemap = mapOf<String, () -> AbstractPotion>(
