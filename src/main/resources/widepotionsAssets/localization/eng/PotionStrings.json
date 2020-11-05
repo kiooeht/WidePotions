@@ -13,6 +13,7 @@
     ]
   },
   "${ModID}:BlessingOfTheForge": {
+    "NAME": "Apotheosis Potion",
     "DESCRIPTIONS": [
       "Upgrade ALL your cards for the rest of the combat."
     ]

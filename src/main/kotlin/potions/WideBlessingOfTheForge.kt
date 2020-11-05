@@ -8,14 +8,12 @@ import com.megacrit.cardcrawl.core.Settings
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon
 import com.megacrit.cardcrawl.potions.AbstractPotion
 import com.megacrit.cardcrawl.potions.BlessingOfTheForge
-import com.megacrit.cardcrawl.potions.WeakenPotion
 import com.megacrit.cardcrawl.rooms.AbstractRoom
 import com.megacrit.cardcrawl.ui.panels.TopPanel
 
 class WideBlessingOfTheForge : BlessingOfTheForge(), IsWidePotion {
     init {
-        val strings = CardCrawlGame.languagePack.getPotionString("wide:WidePotion")
-        name = strings.NAME.format(name)
+        name = strings.NAME
 
         initializeData()
 
