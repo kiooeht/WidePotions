@@ -1,12 +1,15 @@
 package com.evacipated.cardcrawl.mod.widepotions.potions
 
 import com.evacipated.cardcrawl.mod.widepotions.WidePotionsMod
+import com.evacipated.cardcrawl.mod.widepotions.extensions.getPrivate
 import com.evacipated.cardcrawl.mod.widepotions.extensions.setPrivateFinal
 import com.evacipated.cardcrawl.mod.widepotions.patches.WidePotency
 import com.megacrit.cardcrawl.core.AbstractCreature
 import com.megacrit.cardcrawl.core.CardCrawlGame
 import com.megacrit.cardcrawl.core.Settings
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon
+import com.megacrit.cardcrawl.localization.LocalizedStrings
+import com.megacrit.cardcrawl.localization.PotionStrings
 import com.megacrit.cardcrawl.potions.*
 import com.megacrit.cardcrawl.ui.panels.TopPanel
 import kotlin.math.ceil
@@ -32,11 +35,16 @@ class WidePotion(
         spotsColor = potion.spotsColor
 
         initialized = true
-        val strings = CardCrawlGame.languagePack.getPotionString(WidePotionsMod.makeID(ID))
-        if (strings.NAME != null) {
-            name = strings.NAME
+        val potionStrings = LocalizedStrings::class.getPrivate<Map<String, PotionStrings>>("potions")
+        val strings = potionStrings[WidePotionsMod.makeID(ID)]
+        var customName = false
+        if (strings != null) {
+            if (strings.NAME != null) {
+                name = strings.NAME
+                customName = true
+            }
         }
-        if (name == "[MISSING_NAME]") {
+        if (!customName) {
             val wideStrings = CardCrawlGame.languagePack.getPotionString(WidePotionsMod.makeID("WidePotion"))
             name = wideStrings.NAME.format(potion.name)
         }
