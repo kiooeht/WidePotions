@@ -2,6 +2,7 @@ package com.evacipated.cardcrawl.mod.widepotions.extensions
 
 import java.lang.reflect.Field
 import java.lang.reflect.Method
+import java.lang.reflect.Modifier
 import kotlin.reflect.KClass
 
 private val fieldMap: MutableMap<Pair<Class<*>, String>, Field> = mutableMapOf()
@@ -56,6 +57,16 @@ fun <T> Any.setPrivate(
     clazz: Class<*> = this::class.java
 ) {
     getSavedField(clazz, fieldName).set(this, value)
+}
+
+fun <T> Any.setPrivateFinal(
+    fieldName: String,
+    value: T,
+    clazz: Class<*> = this::class.java
+) {
+    val targetField = getSavedField(clazz, fieldName)
+    getSavedField(Field::class.java, "modifiers").set(targetField, targetField.modifiers and Modifier.FINAL.inv())
+    targetField.set(this, value)
 }
 
 fun <T> KClass<*>.getPrivate(fieldName: String): T {
