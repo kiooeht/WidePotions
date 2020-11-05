@@ -28,6 +28,10 @@ class WidePotion(
         initialized = true
         strings = CardCrawlGame.languagePack.getPotionString("wide:WidePotion")
         name = strings.NAME.format(potion.name)
+
+        isThrown = potion.isThrown
+        targetRequired = potion.targetRequired
+
         initializeData()
 
         hb.resize(hb.width * 2, hb.height)
