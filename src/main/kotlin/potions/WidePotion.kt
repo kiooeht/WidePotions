@@ -126,6 +126,11 @@ class WidePotion(
             RegenPotion.POTION_ID,
             SpeedPotion.POTION_ID,
             SteroidPotion.POTION_ID,
+            CultistPotion.POTION_ID,
+            EssenceOfSteel.POTION_ID,
+            LiquidBronze.POTION_ID,
+            DistilledChaosPotion.POTION_ID,
+            LiquidMemories.POTION_ID,
         )
 
         val whitemap = mapOf<String, () -> AbstractPotion>(
