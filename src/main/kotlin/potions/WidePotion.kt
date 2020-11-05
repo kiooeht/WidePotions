@@ -109,7 +109,8 @@ class WidePotion(
         )
 
         val whitemap = mapOf<String, () -> AbstractPotion>(
-            WeakenPotion.POTION_ID to ::WideWeakenPotion
+            WeakenPotion.POTION_ID to ::WideWeakenPotion,
+            FearPotion.POTION_ID to ::WideFearPotion
         )
     }
 }

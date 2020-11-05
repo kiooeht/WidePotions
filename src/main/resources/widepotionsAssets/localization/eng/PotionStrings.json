@@ -6,5 +6,10 @@
     "DESCRIPTIONS": [
       "Apply #b%1$d #yWeak to ALL enemies."
     ]
+  },
+  "${ModID}:FearPotion": {
+    "DESCRIPTIONS": [
+      "Apply #b%1$d #yVulnerable to ALL enemies."
+    ]
   }
 }
