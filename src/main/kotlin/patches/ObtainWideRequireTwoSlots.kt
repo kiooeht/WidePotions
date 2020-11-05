@@ -1,5 +1,6 @@
 package com.evacipated.cardcrawl.mod.widepotions.patches
 
+import com.evacipated.cardcrawl.mod.widepotions.extensions.isWide
 import com.evacipated.cardcrawl.mod.widepotions.potions.WidePotion
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch
 import com.evacipated.cardcrawl.modthespire.lib.SpireReturn
@@ -16,7 +17,7 @@ import com.megacrit.cardcrawl.potions.PotionSlot
 object ObtainWideRequireTwoSlots {
     @JvmStatic
     fun Prefix(__instance: AbstractPlayer, potionToObtain: AbstractPotion): SpireReturn<Boolean> {
-        if (potionToObtain !is WidePotion || __instance.potions.isEmpty()) {
+        if (!potionToObtain.isWide() || __instance.potions.isEmpty()) {
             return SpireReturn.Continue()
         }
 

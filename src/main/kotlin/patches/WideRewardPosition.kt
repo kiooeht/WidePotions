@@ -1,6 +1,6 @@
 package com.evacipated.cardcrawl.mod.widepotions.patches
 
-import com.evacipated.cardcrawl.mod.widepotions.potions.WidePotion
+import com.evacipated.cardcrawl.mod.widepotions.extensions.isWide
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch
 import com.megacrit.cardcrawl.core.Settings
 import com.megacrit.cardcrawl.potions.AbstractPotion
@@ -19,7 +19,7 @@ object WideRewardPosition {
             override fun edit(m: MethodCall) {
                 if (m.className == AbstractPotion::class.qualifiedName && m.methodName == "move") {
                     m.replace(
-                        "if (\$0 instanceof ${WidePotion::class.qualifiedName}) {" +
+                        "if (${WideRewardPosition::class.qualifiedName}.isWide(\$0)) {" +
                                 "\$1 -= 24 * ${Settings::class.qualifiedName}.scale;" +
                                 "}" +
                                 "\$_ = \$proceed(\$\$);"
@@ -27,4 +27,8 @@ object WideRewardPosition {
                 }
             }
         }
+
+    @JvmStatic
+    fun isWide(potion: AbstractPotion): Boolean =
+        potion.isWide()
 }

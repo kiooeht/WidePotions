@@ -93,7 +93,7 @@ class WidePotion(
 
     companion object {
         private fun makeID(id: String): String =
-            "wide:$id"
+            id
 
         val whitelist = listOf(
             StrengthPotion.POTION_ID,

@@ -1,5 +1,6 @@
 package com.evacipated.cardcrawl.mod.widepotions.patches
 
+import com.evacipated.cardcrawl.mod.widepotions.extensions.makeWide
 import com.evacipated.cardcrawl.mod.widepotions.potions.WidePotion
 import com.evacipated.cardcrawl.modthespire.lib.ByRef
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch
@@ -15,7 +16,7 @@ object WideRewards {
     @JvmStatic
     fun Prefix(__instance: RewardItem, @ByRef potion: Array<AbstractPotion>) {
         if (WidePotion.whitelist.contains(potion[0].ID)) {
-            potion[0] = WidePotion(potion[0])
+            potion[0] = potion[0].makeWide()
         }
     }
 }

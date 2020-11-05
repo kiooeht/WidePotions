@@ -2,7 +2,7 @@ package com.evacipated.cardcrawl.mod.widepotions.patches
 
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
-import com.evacipated.cardcrawl.mod.widepotions.potions.WidePotion
+import com.evacipated.cardcrawl.mod.widepotions.extensions.isWide
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatches
 import com.megacrit.cardcrawl.core.Settings
@@ -41,7 +41,7 @@ object RenderWide {
             override fun edit(m: MethodCall) {
                 if (m.methodName == "draw") {
                     m.replace(
-                        "if (this instanceof ${WidePotion::class.qualifiedName}) {" +
+                        "if (${RenderWide::class.qualifiedName}.isWide(this)) {" +
                                 "\$2 += 24 * ${Settings::class.qualifiedName}.scale;" +
                                 "\$8 *= 2;" +
                                 "}" +
@@ -50,4 +50,8 @@ object RenderWide {
                 }
             }
         }
+
+    @JvmStatic
+    fun isWide(potion: AbstractPotion): Boolean =
+        potion.isWide()
 }

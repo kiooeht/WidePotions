@@ -2,14 +2,19 @@ package com.evacipated.cardcrawl.mod.widepotions
 
 import basemod.BaseMod
 import basemod.ModPanel
+import basemod.abstracts.CustomSavable
 import basemod.interfaces.EditStringsSubscriber
 import basemod.interfaces.PostInitializeSubscriber
+import com.evacipated.cardcrawl.mod.widepotions.extensions.isWide
+import com.evacipated.cardcrawl.mod.widepotions.extensions.makeWide
 import com.evacipated.cardcrawl.mod.widepotions.helpers.AssetLoader
 import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer
 import com.megacrit.cardcrawl.core.Settings
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon
 import com.megacrit.cardcrawl.helpers.ImageMaster
 import com.megacrit.cardcrawl.localization.PotionStrings
 import java.io.IOException
+import java.lang.Integer.min
 import java.util.*
 
 @SpireInitializer
@@ -58,6 +63,25 @@ class WidePotionsMod :
             "TODO",
             settingsPanel
         )
+
+        BaseMod.addSaveField<List<Boolean>?>(makeID("IsWide"), object : CustomSavable<List<Boolean>?> {
+            override fun onSave(): List<Boolean>? {
+                return AbstractDungeon.player?.potions
+                    ?.map { p -> p.isWide() }
+            }
+
+            override fun onLoad(save: List<Boolean>?) {
+                if (save != null) {
+                    for (i in 0 until min(save.size, AbstractDungeon.player.potions.size)) {
+                        if (save[i]) {
+                            AbstractDungeon.player.potions[i] = AbstractDungeon.player.potions[i].makeWide()
+                            AbstractDungeon.player.potions[i].setAsObtained(i)
+                            AbstractDungeon.player.potions[i].initializeData()
+                        }
+                    }
+                }
+            }
+        })
     }
 
     private fun makeLocPath(language: Settings.GameLanguage, filename: String): String {

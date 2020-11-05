@@ -1,7 +1,7 @@
 package com.evacipated.cardcrawl.mod.widepotions.patches
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
-import com.evacipated.cardcrawl.mod.widepotions.potions.WidePotion
+import com.evacipated.cardcrawl.mod.widepotions.extensions.isWide
 import com.evacipated.cardcrawl.modthespire.lib.SpireField
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch
 import com.megacrit.cardcrawl.core.Settings
@@ -54,7 +54,7 @@ object WideFlashPotionEffect {
     object WideCtor {
         @JvmStatic
         fun Postfix(__instance: FlashPotionEffect, p: AbstractPotion) {
-            if (p is WidePotion) {
+            if (p.isWide()) {
                 Field.isWide[__instance] = true
             }
         }
