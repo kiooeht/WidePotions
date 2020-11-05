@@ -11,5 +11,10 @@
     "DESCRIPTIONS": [
       "Apply #b%1$d #yVulnerable to ALL enemies."
     ]
+  },
+  "${ModID}:BlessingOfTheForge": {
+    "DESCRIPTIONS": [
+      "Upgrade ALL your cards for the rest of the combat."
+    ]
   }
 }
