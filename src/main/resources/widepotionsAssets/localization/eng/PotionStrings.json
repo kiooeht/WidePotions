@@ -1,5 +1,10 @@
 {
   "wide:WidePotion": {
     "NAME": "Wide %1$s"
+  },
+  "${ModID}:Weak Potion": {
+    "DESCRIPTIONS": [
+      "Apply #b%1$d #yWeak to ALL enemies."
+    ]
   }
 }
