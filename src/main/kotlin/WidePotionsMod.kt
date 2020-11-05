@@ -1,6 +1,7 @@
 package com.evacipated.cardcrawl.mod.widepotions
 
 import basemod.BaseMod
+import basemod.ModLabel
 import basemod.ModPanel
 import basemod.abstracts.CustomSavable
 import basemod.interfaces.EditStringsSubscriber
@@ -11,6 +12,7 @@ import com.evacipated.cardcrawl.mod.widepotions.helpers.AssetLoader
 import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer
 import com.megacrit.cardcrawl.core.Settings
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon
+import com.megacrit.cardcrawl.helpers.FontHelper
 import com.megacrit.cardcrawl.helpers.ImageMaster
 import com.megacrit.cardcrawl.localization.PotionStrings
 import java.io.IOException
@@ -27,6 +29,7 @@ class WidePotionsMod :
         val NAME: String
 
         val assets = AssetLoader()
+        var wideChance = 0.2f
 
         init {
             var tmpID = "widepotions"
@@ -55,6 +58,22 @@ class WidePotionsMod :
 
     override fun receivePostInitialize() {
         val settingsPanel = ModPanel()
+        ModLabel("Wide Chance", 400f, 730f, Settings.CREAM_COLOR, FontHelper.charDescFont, settingsPanel) {}.let {
+            settingsPanel.addUIElement(it)
+        }
+        val chanceSlider = ModMinMaxSlider(
+            "",
+            400f,
+            700f,
+            5f,
+            100f,
+            wideChance * 100f,
+            "%.0f%%",
+            settingsPanel
+        ) { slider ->
+            wideChance = slider.value / 100f
+        }
+        settingsPanel.addUIElement(chanceSlider)
 
         BaseMod.registerModBadge(
             ImageMaster.loadImage(assetPath("images/modBadge.png")),
