@@ -13,7 +13,7 @@
         <ModID>widepotions</ModID>
         <JarName>WidePotions</JarName>
         <SlayTheSpire.version>07-30-2020</SlayTheSpire.version>
-        <ModTheSpire.version>3.17.0</ModTheSpire.version>
+        <ModTheSpire.version>3.18.0</ModTheSpire.version>
 
         <kotlin.version>1.4.10</kotlin.version>
         <kotlin.compiler.incremental>true</kotlin.compiler.incremental>
@@ -137,29 +137,6 @@
                         <id>java-test-compile</id>
                         <phase>test-compile</phase>
                         <goals> <goal>testCompile</goal> </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-shade-plugin</artifactId>
-                <version>2.4.2</version>
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>shade</goal>
-                        </goals>
-                        <configuration>
-                            <filters>
-                                <filter>
-                                    <artifact>*:*</artifact>
-                                    <excludes>
-                                        <exclude>META-INF/kotlin-stdlib*</exclude>
-                                    </excludes>
-                                </filter>
-                            </filters>
-                        </configuration>
                     </execution>
                 </executions>
             </plugin>
