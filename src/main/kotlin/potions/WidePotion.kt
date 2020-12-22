@@ -165,6 +165,7 @@ class WidePotion(
             FearPotion.POTION_ID to ::WideFearPotion,
             BlessingOfTheForge.POTION_ID to ::WideBlessingOfTheForge,
             AttackPotion.POTION_ID to ::WideAttackPotion,
+            SkillPotion.POTION_ID to ::WideSkillPotion,
         )
     }
 }

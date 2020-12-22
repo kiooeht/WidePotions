@@ -34,5 +34,10 @@
     "DESCRIPTIONS": [
       "Choose #b1 of #b3 random #yUpgraded #yAttack cards and add #b%1$d copies to your hand, they cost #b0 this turn."
     ]
+  },
+  "${ModID}:SkillPotion": {
+    "DESCRIPTIONS": [
+      "Choose #b1 of #b3 random #yUpgraded #ySkill cards and add #b%1$d copies to your hand, they cost #b0 this turn."
+    ]
   }
 }
