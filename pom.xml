@@ -52,6 +52,13 @@
             <scope>system</scope>
             <systemPath>${basedir}/../lib/BaseMod.jar</systemPath>
         </dependency>
+        <dependency>
+            <groupId>com.evacipated.cardcrawl.mod</groupId>
+            <artifactId>stslib</artifactId>
+            <version>1.17.0</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/../lib/StSLib.jar</systemPath>
+        </dependency>
     </dependencies>
 
     <build>
