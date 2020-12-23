@@ -16,6 +16,7 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon
 import com.megacrit.cardcrawl.helpers.FontHelper
 import com.megacrit.cardcrawl.helpers.ImageMaster
 import com.megacrit.cardcrawl.localization.PotionStrings
+import com.megacrit.cardcrawl.localization.RelicStrings
 import java.io.IOException
 import java.lang.Integer.min
 import java.util.*
@@ -140,6 +141,7 @@ class WidePotionsMod :
 
     private fun loadLocFiles(language: Settings.GameLanguage) {
         loadLocFile(language, PotionStrings::class.java)
+        loadLocFile(language, RelicStrings::class.java)
     }
 
     override fun receiveEditStrings() {
