@@ -6,11 +6,15 @@ import com.evacipated.cardcrawl.mod.widepotions.WidePotionsMod
 import com.megacrit.cardcrawl.relics.AbstractRelic
 
 class WideRelicRightHalf : AbstractRelic(
-    WidePotionsMod.makeID("RightHalf"),
+    ID,
     "",
     RelicTier.SPECIAL,
     LandingSound.FLAT
 ) {
+    companion object {
+        val ID = WidePotionsMod.makeID("RightHalf")
+    }
+
     init {
         hb.resize(0f, 0f)
     }
