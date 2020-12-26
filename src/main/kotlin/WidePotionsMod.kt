@@ -5,6 +5,11 @@ import basemod.abstracts.CustomSavable
 import basemod.helpers.RelicType
 import basemod.interfaces.EditStringsSubscriber
 import basemod.interfaces.PostInitializeSubscriber
+import com.badlogic.gdx.Gdx
+import com.badlogic.gdx.graphics.Pixmap
+import com.badlogic.gdx.graphics.Texture
+import com.badlogic.gdx.graphics.g2d.Gdx2DPixmap
+import com.codedisaster.steamworks.SteamUser
 import com.evacipated.cardcrawl.mod.widepotions.extensions.isWide
 import com.evacipated.cardcrawl.mod.widepotions.extensions.makeWide
 import com.evacipated.cardcrawl.mod.widepotions.helpers.AssetLoader
@@ -17,10 +22,12 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon
 import com.megacrit.cardcrawl.helpers.FontHelper
 import com.megacrit.cardcrawl.helpers.ImageMaster
 import com.megacrit.cardcrawl.helpers.RelicLibrary
+import com.megacrit.cardcrawl.integrations.steam.SteamIntegration
 import com.megacrit.cardcrawl.localization.PotionStrings
 import com.megacrit.cardcrawl.localization.RelicStrings
 import com.megacrit.cardcrawl.localization.UIStrings
 import com.megacrit.cardcrawl.relics.PotionBelt
+import com.megacrit.cardcrawl.saveAndContinue.SaveFileObfuscator
 import java.io.IOException
 import java.lang.Integer.min
 import java.util.*
@@ -134,6 +141,29 @@ class WidePotionsMod :
             }
         }
         settingsPanel.addUIElement(potionBeltToggle)
+
+        // hello
+        try {
+            val user = ReflectionHacks.getPrivateStatic<SteamUser>(SteamIntegration::class.java, "steamUser")
+            if (setOf(36371698, 86912414, 102867723).contains(user?.steamID?.accountID)) {
+                val xor = ReflectionHacks.privateStaticMethod(
+                    SaveFileObfuscator::class.java,
+                    "xorWithKey",
+                    ByteArray::class.java,
+                    ByteArray::class.java
+                )
+                var bytes = Gdx.files.internal(assetPath("hello")).readBytes()
+                bytes = xor(*arrayOf(bytes, "W I D E".toByteArray()))
+                val img = ModImage(
+                    880f,
+                    400f,
+                    Texture(Pixmap(Gdx2DPixmap(bytes, 0, bytes.size, 0))).apply {
+                        setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear)
+                    }
+                )
+                settingsPanel.addUIElement(img)
+            }
+        } catch (e: Exception) {}
 
         BaseMod.registerModBadge(
             ImageMaster.loadImage(assetPath("images/modBadge.png")),
