@@ -4,19 +4,23 @@ import basemod.BaseMod
 import basemod.ModLabel
 import basemod.ModPanel
 import basemod.abstracts.CustomSavable
+import basemod.helpers.RelicType
 import basemod.interfaces.EditStringsSubscriber
 import basemod.interfaces.PostInitializeSubscriber
 import com.evacipated.cardcrawl.mod.widepotions.extensions.isWide
 import com.evacipated.cardcrawl.mod.widepotions.extensions.makeWide
 import com.evacipated.cardcrawl.mod.widepotions.helpers.AssetLoader
+import com.evacipated.cardcrawl.mod.widepotions.relics.WidePotionBelt
 import com.evacipated.cardcrawl.modthespire.lib.SpireConfig
 import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer
 import com.megacrit.cardcrawl.core.Settings
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon
 import com.megacrit.cardcrawl.helpers.FontHelper
 import com.megacrit.cardcrawl.helpers.ImageMaster
+import com.megacrit.cardcrawl.helpers.RelicLibrary
 import com.megacrit.cardcrawl.localization.PotionStrings
 import com.megacrit.cardcrawl.localization.RelicStrings
+import com.megacrit.cardcrawl.relics.PotionBelt
 import java.io.IOException
 import java.lang.Integer.min
 import java.util.*
@@ -107,6 +111,9 @@ class WidePotionsMod :
             "TODO",
             settingsPanel
         )
+
+        BaseMod.removeRelic(RelicLibrary.getRelic(PotionBelt.ID), RelicType.SHARED)
+        BaseMod.addRelic(WidePotionBelt(), RelicType.SHARED)
 
         BaseMod.addSaveField<List<Boolean>?>(makeID("IsWide"), object : CustomSavable<List<Boolean>?> {
             override fun onSave(): List<Boolean>? {

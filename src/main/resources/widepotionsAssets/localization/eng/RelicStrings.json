@@ -1,7 +1,19 @@
 {
+  "${ModID}:RightHalf": {
+    "NAME": "",
+    "FLAVOR": "",
+    "DESCRIPTIONS": []
+  },
   "${ModID}:Toy Ornithopter": {
     "DESCRIPTIONS": [
       " NL If the potion is #yWide [REMOVE_SPACE], heal an additional #b%1$d HP."
+    ]
+  },
+  "${ModID}:Potion Belt": {
+    "NAME": "Wide Potion Belt",
+    "FLAVOR": "I can hold even more Potions using this belt!",
+    "DESCRIPTIONS": [
+      "Upon pickup, gain #b%1$d Potion slots."
     ]
   }
 }
