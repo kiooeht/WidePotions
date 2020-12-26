@@ -60,7 +60,7 @@ class WidePotionsMod :
 
             try {
                 val defaults = Properties()
-                defaults["WideChance"] = 0.2f.toString()
+                defaults["WideChance"] = 0.4f.toString()
                 config = SpireConfig(ID, "config", defaults)
             } catch (e: Exception) {
                 e.printStackTrace()
@@ -74,7 +74,7 @@ class WidePotionsMod :
             return if (config != null) {
                 config!!.getFloat("WideChance")
             } else {
-                0.2f
+                0.4f
             }
         }
     }
