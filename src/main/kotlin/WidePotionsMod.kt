@@ -1,9 +1,6 @@
 package com.evacipated.cardcrawl.mod.widepotions
 
-import basemod.BaseMod
-import basemod.ModLabel
-import basemod.ModMinMaxSlider
-import basemod.ModPanel
+import basemod.*
 import basemod.abstracts.CustomSavable
 import basemod.helpers.RelicType
 import basemod.interfaces.EditStringsSubscriber
@@ -61,6 +58,7 @@ class WidePotionsMod :
             try {
                 val defaults = Properties()
                 defaults["WideChance"] = 0.4f.toString()
+                defaults["WidePotionBelt"] = true.toString()
                 config = SpireConfig(ID, "config", defaults)
             } catch (e: Exception) {
                 e.printStackTrace()
@@ -76,6 +74,10 @@ class WidePotionsMod :
             } else {
                 0.4f
             }
+        }
+
+        fun widePotionBelt(): Boolean {
+            return config?.getBool("WidePotionBelt") ?: true
         }
     }
 
@@ -105,6 +107,28 @@ class WidePotionsMod :
         }
         settingsPanel.addUIElement(chanceSlider)
 
+        val potionBeltToggle = ModLabeledToggleButton(
+            "Wide Potion Belt",
+            400f,
+            620f,
+            Settings.CREAM_COLOR,
+            FontHelper.charDescFont,
+            widePotionBelt(),
+            settingsPanel,
+            {}
+        ) { toggle ->
+            config?.let {
+                replacePotionBelt(toggle.enabled)
+                it.setBool("WidePotionBelt", toggle.enabled)
+                try {
+                    it.save()
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+            }
+        }
+        settingsPanel.addUIElement(potionBeltToggle)
+
         BaseMod.registerModBadge(
             ImageMaster.loadImage(assetPath("images/modBadge.png")),
             NAME,
@@ -113,8 +137,9 @@ class WidePotionsMod :
             settingsPanel
         )
 
-        BaseMod.removeRelic(RelicLibrary.getRelic(PotionBelt.ID), RelicType.SHARED)
-        BaseMod.addRelic(WidePotionBelt(), RelicType.SHARED)
+        if (widePotionBelt()) {
+            replacePotionBelt(true)
+        }
 
         BaseMod.addSaveField<List<Boolean>?>(makeID("IsWide"), object : CustomSavable<List<Boolean>?> {
             override fun onSave(): List<Boolean>? {
@@ -134,6 +159,15 @@ class WidePotionsMod :
                 }
             }
         })
+    }
+
+    private fun replacePotionBelt(wide: Boolean) {
+        BaseMod.removeRelic(RelicLibrary.getRelic(PotionBelt.ID), RelicType.SHARED)
+        if (wide) {
+            BaseMod.addRelic(WidePotionBelt(), RelicType.SHARED)
+        } else {
+            BaseMod.addRelic(PotionBelt(), RelicType.SHARED)
+        }
     }
 
     private fun makeLocPath(language: Settings.GameLanguage, filename: String): String {
