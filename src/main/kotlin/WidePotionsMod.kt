@@ -11,6 +11,7 @@ import com.evacipated.cardcrawl.mod.widepotions.helpers.AssetLoader
 import com.evacipated.cardcrawl.mod.widepotions.relics.WidePotionBelt
 import com.evacipated.cardcrawl.modthespire.lib.SpireConfig
 import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer
+import com.megacrit.cardcrawl.core.CardCrawlGame
 import com.megacrit.cardcrawl.core.Settings
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon
 import com.megacrit.cardcrawl.helpers.FontHelper
@@ -18,6 +19,7 @@ import com.megacrit.cardcrawl.helpers.ImageMaster
 import com.megacrit.cardcrawl.helpers.RelicLibrary
 import com.megacrit.cardcrawl.localization.PotionStrings
 import com.megacrit.cardcrawl.localization.RelicStrings
+import com.megacrit.cardcrawl.localization.UIStrings
 import com.megacrit.cardcrawl.relics.PotionBelt
 import java.io.IOException
 import java.lang.Integer.min
@@ -82,14 +84,18 @@ class WidePotionsMod :
     }
 
     override fun receivePostInitialize() {
+        val TEXT = CardCrawlGame.languagePack.getUIString(makeID("ConfigMenu"))?.TEXT ?: Array(20) { "[MISSING_TEXT]" }
+
         val settingsPanel = ModPanel()
-        ModLabel("Wide Chance", 400f, 730f, Settings.CREAM_COLOR, FontHelper.charDescFont, settingsPanel) {}.let {
+        ModLabel(TEXT[0], 400f, 700f, Settings.CREAM_COLOR, FontHelper.charDescFont, settingsPanel) {}.let {
             settingsPanel.addUIElement(it)
         }
+
+        val textWidth = FontHelper.getWidth(FontHelper.charDescFont, TEXT[0], 1f / Settings.scale)
         val chanceSlider = ModMinMaxSlider(
             "",
-            400f,
-            700f,
+            400f + 40f + textWidth,
+            707f,
             5f,
             100f,
             wideChance() * 100f,
@@ -108,9 +114,9 @@ class WidePotionsMod :
         settingsPanel.addUIElement(chanceSlider)
 
         val potionBeltToggle = ModLabeledToggleButton(
-            "Wide Potion Belt",
-            400f,
-            620f,
+            TEXT[1],
+            400f - 40f,
+            640f,
             Settings.CREAM_COLOR,
             FontHelper.charDescFont,
             widePotionBelt(),
@@ -182,6 +188,7 @@ class WidePotionsMod :
     }
 
     private fun loadLocFiles(language: Settings.GameLanguage) {
+        loadLocFile(language, UIStrings::class.java)
         loadLocFile(language, PotionStrings::class.java)
         loadLocFile(language, RelicStrings::class.java)
     }

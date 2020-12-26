@@ -1,0 +1,8 @@
+{
+  "${ModID}:ConfigMenu": {
+    "TEXT": [
+      "Wide Chance",
+      "Wide Potion Belt"
+    ]
+  }
+}
