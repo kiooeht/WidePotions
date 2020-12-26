@@ -76,9 +76,11 @@ object RenderWide {
         object : ExprEditor() {
             override fun edit(m: MethodCall) {
                 if (m.methodName == "draw") {
+                    val isRelic = m.enclosingClass.name == AbstractRelic::class.qualifiedName
+                    val offset = if (isRelic) { 0.5f } else { 0.75f }
                     m.replace(
                         "if (${RenderWide::class.qualifiedName}.isWide(this)) {" +
-                                "\$2 += 24 * ${Settings::class.qualifiedName}.scale;" +
+                                "\$2 += (\$4 * $offset) * ${Settings::class.qualifiedName}.scale;" +
                                 "\$8 *= 2;" +
                                 "}" +
                                 "\$_ = \$proceed(\$\$);"
