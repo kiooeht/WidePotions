@@ -15,7 +15,7 @@ import com.megacrit.cardcrawl.ui.panels.TopPanel
 import kotlin.math.ceil
 import kotlin.math.floor
 
-class WidePotion(
+open class WidePotion(
     val potion: AbstractPotion
 ) : AbstractPotion(
     "[MISSING_NAME]",
@@ -67,7 +67,8 @@ class WidePotion(
             potion.initializeData()
             WidePotency.isWidePotion = null
             if (customDescription != null) {
-                description = customDescription!!.format(potion.getPrivate<Int>("potency", AbstractPotion::class.java))
+                potency = potion.getPrivate("potency", AbstractPotion::class.java)
+                description = customDescription!!.format(potency)
                 potion.description = description
             } else {
                 description = potion.description
