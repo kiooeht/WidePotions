@@ -2,6 +2,7 @@ package com.evacipated.cardcrawl.mod.widepotions
 
 import basemod.BaseMod
 import basemod.ModLabel
+import basemod.ModMinMaxSlider
 import basemod.ModPanel
 import basemod.abstracts.CustomSavable
 import basemod.helpers.RelicType
