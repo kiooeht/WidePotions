@@ -4,10 +4,6 @@ import com.evacipated.cardcrawl.modthespire.lib.SpirePatch
 import com.megacrit.cardcrawl.actions.unique.DiscoveryAction
 import com.megacrit.cardcrawl.cards.AbstractCard
 
-@SpirePatch(
-    clz = DiscoveryAction::class,
-    method = "generateCardChoices"
-)
 object UpgradedDiscovery {
     private val upgradeCardsMap = mutableSetOf<DiscoveryAction>()
 
@@ -21,12 +17,40 @@ object UpgradedDiscovery {
             }
         }
 
-    @JvmStatic
-    fun Postfix(__result: ArrayList<AbstractCard>, __instance: DiscoveryAction, type: AbstractCard.CardType): ArrayList<AbstractCard> {
-        if (__instance.upgradeCards) {
-            __result.forEach(AbstractCard::upgrade)
-            __instance.upgradeCards = false
+    @SpirePatch(
+        clz = DiscoveryAction::class,
+        method = "generateCardChoices"
+    )
+    object Type {
+        @JvmStatic
+        fun Postfix(
+            __result: ArrayList<AbstractCard>,
+            __instance: DiscoveryAction,
+            type: AbstractCard.CardType
+        ): ArrayList<AbstractCard> {
+            if (__instance.upgradeCards) {
+                __result.forEach(AbstractCard::upgrade)
+                __instance.upgradeCards = false
+            }
+            return __result
         }
-        return __result
+    }
+
+    @SpirePatch(
+        clz = DiscoveryAction::class,
+        method = "generateColorlessCardChoices"
+    )
+    object Colorless {
+        @JvmStatic
+        fun Postfix(
+            __result: ArrayList<AbstractCard>,
+            __instance: DiscoveryAction
+        ): ArrayList<AbstractCard> {
+            if (__instance.upgradeCards) {
+                __result.forEach(AbstractCard::upgrade)
+                __instance.upgradeCards = false
+            }
+            return __result
+        }
     }
 }
