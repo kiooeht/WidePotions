@@ -13,6 +13,7 @@ import com.codedisaster.steamworks.SteamUser
 import com.evacipated.cardcrawl.mod.widepotions.extensions.isWide
 import com.evacipated.cardcrawl.mod.widepotions.extensions.makeWide
 import com.evacipated.cardcrawl.mod.widepotions.helpers.AssetLoader
+import com.evacipated.cardcrawl.mod.widepotions.potions.WidePotion
 import com.evacipated.cardcrawl.mod.widepotions.relics.WidePotionBelt
 import com.evacipated.cardcrawl.modthespire.lib.SpireConfig
 import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer
@@ -87,6 +88,18 @@ class WidePotionsMod :
 
         fun widePotionBelt(): Boolean {
             return config?.getBool("WidePotionBelt") ?: true
+        }
+
+        @Suppress("unused")
+        @JvmStatic
+        fun whitelistSimplePotion(potionID: String) {
+            WidePotion.whitelist.add(potionID)
+        }
+
+        @Suppress("unused")
+        @JvmStatic
+        fun whitelistComplexPotion(potionID: String, newPotion: NewPotion) {
+            WidePotion.whitemap.putIfAbsent(potionID, newPotion::newPotion)
         }
     }
 

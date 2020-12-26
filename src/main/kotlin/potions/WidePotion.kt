@@ -131,7 +131,7 @@ class WidePotion(
         private fun makeID(id: String): String =
             id
 
-        val whitelist = listOf(
+        internal val whitelist = mutableSetOf(
             StrengthPotion.POTION_ID,
             DexterityPotion.POTION_ID,
             BlockPotion.POTION_ID,
@@ -160,7 +160,7 @@ class WidePotion(
             DuplicationPotion.POTION_ID,
         )
 
-        val whitemap = mapOf<String, () -> AbstractPotion>(
+        internal val whitemap = mutableMapOf<String, () -> AbstractPotion>(
             WeakenPotion.POTION_ID to ::WideWeakenPotion,
             FearPotion.POTION_ID to ::WideFearPotion,
             BlessingOfTheForge.POTION_ID to ::WideBlessingOfTheForge,

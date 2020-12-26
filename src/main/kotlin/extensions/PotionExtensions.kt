@@ -1,3 +1,5 @@
+@file:JvmName("PotionExtensions")
+
 package com.evacipated.cardcrawl.mod.widepotions.extensions
 
 import com.evacipated.cardcrawl.mod.widepotions.potions.IsWidePotion
