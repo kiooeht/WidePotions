@@ -29,7 +29,6 @@ class WidePotionBelt : PotionBelt(), IsWidePotion {
             ++AbstractDungeon.player.potionSlots
             AbstractDungeon.player.potions.add(PotionSlot(AbstractDungeon.player.potionSlots - 1))
         }
-        WideRelicRightHalf().instantObtain()
     }
 
     override fun update() {
