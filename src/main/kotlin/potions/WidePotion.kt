@@ -1,5 +1,6 @@
 package com.evacipated.cardcrawl.mod.widepotions.potions
 
+import basemod.patches.whatmod.WhatMod
 import com.evacipated.cardcrawl.mod.widepotions.WidePotionsMod
 import com.evacipated.cardcrawl.mod.widepotions.extensions.getPrivate
 import com.evacipated.cardcrawl.mod.widepotions.extensions.setPrivateFinal
@@ -57,6 +58,7 @@ open class WidePotion(
         targetRequired = potion.targetRequired
 
         initializeData()
+        fixDoubleWhatMod()
 
         hb.resize(hb.width * 2, hb.height)
     }
@@ -126,6 +128,12 @@ open class WidePotion(
         super.adjustPosition(slot)
 
         hb.move(TopPanel.potionX + (slot + 0.5f) * Settings.POTION_W, posY)
+    }
+
+    private fun fixDoubleWhatMod() {
+        if (WhatMod.enabled && this::class != WidePotion::class && tips[0].body != description) {
+            tips[0].body = description
+        }
     }
 
     companion object {
