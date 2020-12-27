@@ -160,6 +160,7 @@ open class WidePotion(
             SwiftPotion.POTION_ID,
             DuplicationPotion.POTION_ID,
             CunningPotion.POTION_ID,
+            EssenceOfDarkness.POTION_ID,
         )
 
         internal val whitemap = mutableMapOf<String, () -> AbstractPotion>(
