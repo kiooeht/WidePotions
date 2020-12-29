@@ -49,6 +49,7 @@ object WideToyOrnithopter {
             ctClass.addMethod(method)
 
             method.addLocalVariable("potion", pool.get(AbstractPotion::class.qualifiedName))
+            method.insertBefore("potion = \$1;")
             method.instrument(
                 object : ExprEditor() {
                     override fun edit(e: NewExpr) {
