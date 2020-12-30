@@ -1,16 +1,20 @@
 package com.evacipated.cardcrawl.mod.widepotions.relics
 
 import com.evacipated.cardcrawl.mod.widepotions.WidePotionsMod
+import com.evacipated.cardcrawl.mod.widepotions.extensions.getPrivate
 import com.evacipated.cardcrawl.mod.widepotions.extensions.privateMethod
+import com.evacipated.cardcrawl.mod.widepotions.extensions.setPrivate
 import com.evacipated.cardcrawl.mod.widepotions.extensions.setPrivateFinal
 import com.evacipated.cardcrawl.mod.widepotions.potions.IsWidePotion
 import com.megacrit.cardcrawl.core.CardCrawlGame
+import com.megacrit.cardcrawl.core.Settings
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon
 import com.megacrit.cardcrawl.helpers.Hitbox
 import com.megacrit.cardcrawl.helpers.PowerTip
 import com.megacrit.cardcrawl.potions.PotionSlot
 import com.megacrit.cardcrawl.relics.AbstractRelic
 import com.megacrit.cardcrawl.relics.PotionBelt
+import com.megacrit.cardcrawl.ui.panels.TopPanel
 
 class WidePotionBelt : PotionBelt(), IsWidePotion {
     init {
@@ -33,6 +37,10 @@ class WidePotionBelt : PotionBelt(), IsWidePotion {
             ++AbstractDungeon.player.potionSlots
             AbstractDungeon.player.potions.add(PotionSlot(AbstractDungeon.player.potionSlots - 1))
         }
+
+        val floorX = TopPanel::class.getPrivate<Float>("floorX")
+        TopPanel::class.setPrivate("floorX", floorX + 40 * Settings.scale)
+        AbstractDungeon.topPanel.setupAscensionMode()
     }
 
     override fun update() {
