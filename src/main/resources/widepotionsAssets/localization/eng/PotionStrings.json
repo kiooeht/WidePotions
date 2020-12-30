@@ -54,5 +54,10 @@
     "DESCRIPTIONS": [
       "Enter #yDivinity #yStance. NL At the start of your next turn, enter #yDivinity #yStance."
     ]
+  },
+  "${ModID}:SmokeBomb": {
+    "DESCRIPTIONS": [
+      "Escape from a non-boss combat. Receive rewards."
+    ]
   }
 }

@@ -181,6 +181,7 @@ open class WidePotion(
             PowerPotion.POTION_ID to ::WidePowerPotion,
             ColorlessPotion.POTION_ID to ::WideColorlessPotion,
             Ambrosia.POTION_ID to ::WideAmbrosia,
+            SmokeBomb.POTION_ID to ::WideSmokeBomb,
         )
     }
 }
