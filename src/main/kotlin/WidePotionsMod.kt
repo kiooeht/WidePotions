@@ -4,6 +4,7 @@ import basemod.*
 import basemod.abstracts.CustomSavable
 import basemod.helpers.RelicType
 import basemod.interfaces.EditStringsSubscriber
+import basemod.interfaces.PostDungeonInitializeSubscriber
 import basemod.interfaces.PostInitializeSubscriber
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.Pixmap
@@ -29,7 +30,9 @@ import com.megacrit.cardcrawl.localization.PowerStrings
 import com.megacrit.cardcrawl.localization.RelicStrings
 import com.megacrit.cardcrawl.localization.UIStrings
 import com.megacrit.cardcrawl.relics.PotionBelt
+import com.megacrit.cardcrawl.relics.Sozu
 import com.megacrit.cardcrawl.saveAndContinue.SaveFileObfuscator
+import org.apache.logging.log4j.LogManager
 import java.io.IOException
 import java.lang.Integer.min
 import java.util.*
@@ -37,11 +40,14 @@ import java.util.*
 @SpireInitializer
 class WidePotionsMod :
     PostInitializeSubscriber,
-    EditStringsSubscriber
+    EditStringsSubscriber,
+    PostDungeonInitializeSubscriber
 {
     companion object Statics {
         val ID: String
         val NAME: String
+
+        val logger = LogManager.getLogger(WidePotionsMod::class.java)
 
         val assets = AssetLoader()
         private var config: SpireConfig? = null
@@ -70,6 +76,7 @@ class WidePotionsMod :
                 val defaults = Properties()
                 defaults["WideChance"] = 0.4f.toString()
                 defaults["WidePotionBelt"] = true.toString()
+                defaults["DisableSozu"] = false.toString()
                 config = SpireConfig(ID, "config", defaults)
             } catch (e: Exception) {
                 e.printStackTrace()
@@ -89,6 +96,10 @@ class WidePotionsMod :
 
         fun widePotionBelt(): Boolean {
             return config?.getBool("WidePotionBelt") ?: true
+        }
+
+        fun disableSozu(): Boolean {
+            return config?.getBool("DisableSozu") ?: false
         }
 
         @Suppress("unused")
@@ -155,6 +166,27 @@ class WidePotionsMod :
             }
         }
         settingsPanel.addUIElement(potionBeltToggle)
+
+        val sozuToggle = ModLabeledToggleButton(
+            TEXT[2],
+            400f - 40f,
+            590f,
+            Settings.CREAM_COLOR,
+            FontHelper.charDescFont,
+            disableSozu(),
+            settingsPanel,
+            {}
+        ) { toggle ->
+            config?.let {
+                it.setBool("DisableSozu", toggle.enabled)
+                try {
+                    it.save()
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+            }
+        }
+        settingsPanel.addUIElement(sozuToggle)
 
         // hello
         try {
@@ -242,6 +274,14 @@ class WidePotionsMod :
         loadLocFiles(Settings.GameLanguage.ENG)
         if (Settings.language != Settings.GameLanguage.ENG) {
             loadLocFiles(Settings.language)
+        }
+    }
+
+    override fun receivePostDungeonInitialize() {
+        if (disableSozu()) {
+            if (AbstractDungeon.bossRelicPool.removeIf { it == Sozu.ID }) {
+                logger.info("${Sozu.ID} removed from pool.")
+            }
         }
     }
 }

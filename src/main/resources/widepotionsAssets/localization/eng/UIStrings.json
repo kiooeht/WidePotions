@@ -2,7 +2,8 @@
   "${ModID}:ConfigMenu": {
     "TEXT": [
       "Wide Chance",
-      "Wide Potion Belt"
+      "Wide Potion Belt",
+      "Disable Sozu"
     ]
   }
 }
