@@ -27,7 +27,7 @@ open class WidePotion(
 ), IsWidePotion {
     private var initialized = false
     val otherHalf: WidePotionRightHalf = WidePotionRightHalf(this)
-    private var customDescription: String? = null
+    protected var customDescription: String? = null
 
     init {
         setPrivateFinal("color", potion.color, AbstractPotion::class.java)
@@ -182,6 +182,7 @@ open class WidePotion(
             ColorlessPotion.POTION_ID to ::WideColorlessPotion,
             Ambrosia.POTION_ID to ::WideAmbrosia,
             SmokeBomb.POTION_ID to ::WideSmokeBomb,
+            GamblersBrew.POTION_ID to ::WideGamblersBrew,
         )
     }
 }

@@ -59,5 +59,10 @@
     "DESCRIPTIONS": [
       "Escape from a non-boss combat. Receive rewards."
     ]
+  },
+  "${ModID}:GamblersBrew": {
+    "DESCRIPTIONS": [
+      "#yScry #b%1$d. NL Discard any number of cards then draw that many."
+    ]
   }
 }
