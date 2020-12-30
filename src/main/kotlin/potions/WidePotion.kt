@@ -180,6 +180,7 @@ open class WidePotion(
             SkillPotion.POTION_ID to ::WideSkillPotion,
             PowerPotion.POTION_ID to ::WidePowerPotion,
             ColorlessPotion.POTION_ID to ::WideColorlessPotion,
+            Ambrosia.POTION_ID to ::WideAmbrosia,
         )
     }
 }

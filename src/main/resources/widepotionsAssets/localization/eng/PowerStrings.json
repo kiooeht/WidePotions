@@ -1,0 +1,8 @@
+{
+  "${ModID}:WideDivinity": {
+    "NAME": "Wide Divinity",
+    "DESCRIPTIONS": [
+      "At the start of your next turn, enter #yDivinity #yStance."
+    ]
+  }
+}

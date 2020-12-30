@@ -25,6 +25,7 @@ import com.megacrit.cardcrawl.helpers.ImageMaster
 import com.megacrit.cardcrawl.helpers.RelicLibrary
 import com.megacrit.cardcrawl.integrations.steam.SteamIntegration
 import com.megacrit.cardcrawl.localization.PotionStrings
+import com.megacrit.cardcrawl.localization.PowerStrings
 import com.megacrit.cardcrawl.localization.RelicStrings
 import com.megacrit.cardcrawl.localization.UIStrings
 import com.megacrit.cardcrawl.relics.PotionBelt
@@ -234,6 +235,7 @@ class WidePotionsMod :
         loadLocFile(language, UIStrings::class.java)
         loadLocFile(language, PotionStrings::class.java)
         loadLocFile(language, RelicStrings::class.java)
+        loadLocFile(language, PowerStrings::class.java)
     }
 
     override fun receiveEditStrings() {
