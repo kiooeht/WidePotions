@@ -107,8 +107,8 @@ class WidePotionsMod :
 
         @Suppress("unused")
         @JvmStatic
-        fun whitelistComplexPotion(potionID: String, newPotion: NewPotion) {
-            WidePotion.whitemap.putIfAbsent(potionID, newPotion::newPotion)
+        fun whitelistComplexPotion(potionID: String, potion: WidePotion) {
+            WidePotion.whitemap.putIfAbsent(potionID, potion)
         }
     }
 

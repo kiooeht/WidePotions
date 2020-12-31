@@ -114,7 +114,18 @@ open class WidePotion(
         }
 
     override fun makeCopy(): AbstractPotion =
-        WidePotion(potion.makeCopy())
+        if (this::class == WidePotion::class) {
+            WidePotion(potion.makeCopy())
+        } else {
+            try {
+                this::class.java.newInstance()
+            } catch (e: Exception) {
+                when (e) {
+                    is InstantiationException, is IllegalAccessException -> throw NotImplementedError("Custom Wide Potion must implement makeCopy()")
+                    else -> throw e
+                }
+            }
+        }
 
     override fun setAsObtained(potionSlot: Int) {
         super.setAsObtained(potionSlot)
@@ -172,17 +183,17 @@ open class WidePotion(
             PotionOfCapacity.POTION_ID,
         )
 
-        internal val whitemap = mutableMapOf<String, () -> AbstractPotion>(
-            WeakenPotion.POTION_ID to ::WideWeakenPotion,
-            FearPotion.POTION_ID to ::WideFearPotion,
-            BlessingOfTheForge.POTION_ID to ::WideBlessingOfTheForge,
-            AttackPotion.POTION_ID to ::WideAttackPotion,
-            SkillPotion.POTION_ID to ::WideSkillPotion,
-            PowerPotion.POTION_ID to ::WidePowerPotion,
-            ColorlessPotion.POTION_ID to ::WideColorlessPotion,
-            Ambrosia.POTION_ID to ::WideAmbrosia,
-            SmokeBomb.POTION_ID to ::WideSmokeBomb,
-            GamblersBrew.POTION_ID to ::WideGamblersBrew,
+        internal val whitemap = mutableMapOf<String, AbstractPotion>(
+            WeakenPotion.POTION_ID to WideWeakenPotion(),
+            FearPotion.POTION_ID to WideFearPotion(),
+            BlessingOfTheForge.POTION_ID to WideBlessingOfTheForge(),
+            AttackPotion.POTION_ID to WideAttackPotion(),
+            SkillPotion.POTION_ID to WideSkillPotion(),
+            PowerPotion.POTION_ID to WidePowerPotion(),
+            ColorlessPotion.POTION_ID to WideColorlessPotion(),
+            Ambrosia.POTION_ID to WideAmbrosia(),
+            SmokeBomb.POTION_ID to WideSmokeBomb(),
+            GamblersBrew.POTION_ID to WideGamblersBrew(),
         )
     }
 }

@@ -18,7 +18,7 @@ fun AbstractPotion.makeWide(): AbstractPotion {
     if (WidePotion.whitelist.contains(ID)) {
         return WidePotion(this)
     } else if (WidePotion.whitemap.containsKey(ID)) {
-        return WidePotion.whitemap[ID]?.invoke() ?: throw NullPointerException()
+        return WidePotion.whitemap[ID]?.makeCopy() ?: throw NullPointerException()
     }
     throw NullPointerException()
 }
