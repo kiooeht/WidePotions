@@ -13,7 +13,6 @@ import com.badlogic.gdx.graphics.g2d.Gdx2DPixmap
 import com.codedisaster.steamworks.SteamUser
 import com.evacipated.cardcrawl.mod.widepotions.extensions.isWide
 import com.evacipated.cardcrawl.mod.widepotions.extensions.makeWide
-import com.evacipated.cardcrawl.mod.widepotions.helpers.AssetLoader
 import com.evacipated.cardcrawl.mod.widepotions.potions.WidePotion
 import com.evacipated.cardcrawl.mod.widepotions.relics.WidePotionBelt
 import com.evacipated.cardcrawl.modthespire.lib.SpireConfig
@@ -49,7 +48,6 @@ class WidePotionsMod :
 
         val logger = LogManager.getLogger(WidePotionsMod::class.java)
 
-        val assets = AssetLoader()
         private var config: SpireConfig? = null
 
         init {
