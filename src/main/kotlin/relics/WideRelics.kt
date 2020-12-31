@@ -10,6 +10,7 @@ import com.megacrit.cardcrawl.relics.WhiteBeast
 object WideRelics {
     private val wideRelics = mapOf<String, Pair<() -> AbstractRelic, () -> AbstractRelic>>(
         PotionBelt.ID to Pair(::PotionBelt, ::WidePotionBelt),
+        WhiteBeast.ID to Pair(::WhiteBeast, ::WideBeastStatue),
     )
 
     fun replaceRelic(id: String, wide: Boolean): Boolean {

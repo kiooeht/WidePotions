@@ -21,7 +21,6 @@ import com.megacrit.cardcrawl.core.Settings
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon
 import com.megacrit.cardcrawl.helpers.FontHelper
 import com.megacrit.cardcrawl.helpers.ImageMaster
-import com.megacrit.cardcrawl.helpers.RelicLibrary
 import com.megacrit.cardcrawl.integrations.steam.SteamIntegration
 import com.megacrit.cardcrawl.localization.PotionStrings
 import com.megacrit.cardcrawl.localization.PowerStrings
@@ -29,6 +28,7 @@ import com.megacrit.cardcrawl.localization.RelicStrings
 import com.megacrit.cardcrawl.localization.UIStrings
 import com.megacrit.cardcrawl.relics.PotionBelt
 import com.megacrit.cardcrawl.relics.Sozu
+import com.megacrit.cardcrawl.relics.WhiteBeast
 import com.megacrit.cardcrawl.saveAndContinue.SaveFileObfuscator
 import org.apache.logging.log4j.LogManager
 import java.io.IOException
@@ -219,6 +219,7 @@ class WidePotionsMod :
         if (widePotionBelt()) {
             WideRelics.replaceRelic(PotionBelt.ID, true)
         }
+        WideRelics.replaceRelic(WhiteBeast.ID, true)
 
         BaseMod.addSaveField<List<Boolean>?>(makeID("IsWide"), object : CustomSavable<List<Boolean>?> {
             override fun onSave(): List<Boolean>? {

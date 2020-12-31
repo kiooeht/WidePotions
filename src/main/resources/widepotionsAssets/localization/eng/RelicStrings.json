@@ -15,5 +15,9 @@
     "DESCRIPTIONS": [
       "Upon pickup, gain #b%1$d Potion slots."
     ]
+  },
+  "${ModID}:White Beast Statue": {
+    "NAME": "Wide Beast Statue",
+    "FLAVOR": "A white statue of a wide creature you have never seen before."
   }
 }
