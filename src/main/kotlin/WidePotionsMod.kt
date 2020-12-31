@@ -2,7 +2,6 @@ package com.evacipated.cardcrawl.mod.widepotions
 
 import basemod.*
 import basemod.abstracts.CustomSavable
-import basemod.helpers.RelicType
 import basemod.interfaces.EditStringsSubscriber
 import basemod.interfaces.PostDungeonInitializeSubscriber
 import basemod.interfaces.PostInitializeSubscriber
@@ -14,7 +13,7 @@ import com.codedisaster.steamworks.SteamUser
 import com.evacipated.cardcrawl.mod.widepotions.extensions.isWide
 import com.evacipated.cardcrawl.mod.widepotions.extensions.makeWide
 import com.evacipated.cardcrawl.mod.widepotions.potions.WidePotion
-import com.evacipated.cardcrawl.mod.widepotions.relics.WidePotionBelt
+import com.evacipated.cardcrawl.mod.widepotions.relics.WideRelics
 import com.evacipated.cardcrawl.modthespire.lib.SpireConfig
 import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer
 import com.megacrit.cardcrawl.core.CardCrawlGame
@@ -154,7 +153,7 @@ class WidePotionsMod :
             {}
         ) { toggle ->
             config?.let {
-                replacePotionBelt(toggle.enabled)
+                WideRelics.replaceRelic(PotionBelt.ID, toggle.enabled)
                 it.setBool("WidePotionBelt", toggle.enabled)
                 try {
                     it.save()
@@ -218,7 +217,7 @@ class WidePotionsMod :
         )
 
         if (widePotionBelt()) {
-            replacePotionBelt(true)
+            WideRelics.replaceRelic(PotionBelt.ID, true)
         }
 
         BaseMod.addSaveField<List<Boolean>?>(makeID("IsWide"), object : CustomSavable<List<Boolean>?> {
@@ -239,15 +238,6 @@ class WidePotionsMod :
                 }
             }
         })
-    }
-
-    private fun replacePotionBelt(wide: Boolean) {
-        BaseMod.removeRelic(RelicLibrary.getRelic(PotionBelt.ID), RelicType.SHARED)
-        if (wide) {
-            BaseMod.addRelic(WidePotionBelt(), RelicType.SHARED)
-        } else {
-            BaseMod.addRelic(PotionBelt(), RelicType.SHARED)
-        }
     }
 
     private fun makeLocPath(language: Settings.GameLanguage, filename: String): String {
