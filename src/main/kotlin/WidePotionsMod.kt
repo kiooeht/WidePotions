@@ -2,6 +2,7 @@ package com.evacipated.cardcrawl.mod.widepotions
 
 import basemod.*
 import basemod.abstracts.CustomSavable
+import basemod.devcommands.ConsoleCommand
 import basemod.interfaces.EditStringsSubscriber
 import basemod.interfaces.PostDungeonInitializeSubscriber
 import basemod.interfaces.PostInitializeSubscriber
@@ -215,6 +216,8 @@ class WidePotionsMod :
             "TODO",
             settingsPanel
         )
+
+        ConsoleCommand.addCommand("widepotion", WidePotionCommand::class.java)
 
         if (widePotionBelt()) {
             WideRelics.replaceRelic(PotionBelt.ID, true)
