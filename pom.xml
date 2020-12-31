@@ -7,7 +7,7 @@
     <name>Wide Potions</name>
     <groupId>com.evacipated.cardcrawl.mod</groupId>
     <artifactId>widepotions</artifactId>
-    <version>0.3</version>
+    <version>0.4</version>
 
     <properties>
         <ModID>widepotions</ModID>
