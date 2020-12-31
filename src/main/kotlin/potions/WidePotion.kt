@@ -68,8 +68,8 @@ open class WidePotion(
             WidePotency.isWidePotion = this
             potion.initializeData()
             WidePotency.isWidePotion = null
+            potency = potion.getPrivate("potency", AbstractPotion::class.java)
             if (customDescription != null) {
-                potency = potion.getPrivate("potency", AbstractPotion::class.java)
                 description = customDescription!!.format(potency)
                 potion.description = description
             } else {
