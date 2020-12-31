@@ -26,7 +26,7 @@ class WidePotionBelt : PotionBelt(), IsWidePotion {
         }
         description = strings.DESCRIPTIONS[0].format(EXTRA_SLOTS)
         tips[0] = PowerTip(name, description)
-        privateMethod("initializeTips", clazz = AbstractRelic::class).invoke<Unit>()
+        privateMethod("initializeTips", clazz = AbstractRelic::class).invoke<Unit>(this)
 
         hb = MyHitbox(hb)
         hb.resize(PAD_X * 2, PAD_X)
