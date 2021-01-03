@@ -1,5 +1,6 @@
 package com.evacipated.cardcrawl.mod.widepotions.powers
 
+import com.evacipated.cardcrawl.mod.widepotions.potions.IsWidePotion
 import com.megacrit.cardcrawl.core.CardCrawlGame
 import com.megacrit.cardcrawl.localization.PowerStrings
 import com.megacrit.cardcrawl.powers.AbstractPower
@@ -7,7 +8,7 @@ import com.megacrit.cardcrawl.powers.AbstractPower
 abstract class AbstractWidePower(
     id: String,
     regionName: String
-) : AbstractPower() {
+) : AbstractPower(), IsWidePotion {
     protected val powerStrings: PowerStrings
     protected val NAME: String
     protected val DESCRIPTIONS: Array<String>
