@@ -64,5 +64,12 @@
     "DESCRIPTIONS": [
       "#yScry #b%1$d. NL Discard any number of cards then draw that many."
     ]
+  },
+  "${ModID}:Regen Potion": {
+    "DESCRIPTIONS": [
+      "Gain #b%1$d #yWide #yRegen.",
+      "Wide Regen",
+      "Wide Regen heals HP at the end of your turn. Each turn, Wide Regen is reduced by #b%1$d."
+    ]
   }
 }

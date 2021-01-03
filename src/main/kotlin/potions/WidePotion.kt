@@ -168,7 +168,6 @@ open class WidePotion(
             BottledMiracle.POTION_ID,
             HeartOfIron.POTION_ID,
             GhostInAJar.POTION_ID,
-            RegenPotion.POTION_ID,
             SpeedPotion.POTION_ID,
             SteroidPotion.POTION_ID,
             CultistPotion.POTION_ID,
@@ -194,6 +193,7 @@ open class WidePotion(
             Ambrosia.POTION_ID to WideAmbrosia(),
             SmokeBomb.POTION_ID to WideSmokeBomb(),
             GamblersBrew.POTION_ID to WideGamblersBrew(),
+            RegenPotion.POTION_ID to WideRegenPotion(),
         )
     }
 }
