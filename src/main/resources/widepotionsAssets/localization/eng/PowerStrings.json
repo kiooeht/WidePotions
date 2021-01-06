@@ -10,5 +10,12 @@
     "DESCRIPTIONS": [
       "At the end of your turn, heal #b%1$d #yHP, then reduce #yWide #yRegen by #b%2$d."
     ]
+  },
+  "${ModID}:TriplicationPower": {
+    "NAME": "Triplication",
+    "DESCRIPTIONS": [
+      "Your next card is played thrice this turn.",
+      "Your next #b%1$d cards are played thrice this turn."
+    ]
   }
 }

@@ -19,9 +19,9 @@
     ]
   },
   "${ModID}:DuplicationPotion": {
-    "NAME": "Twice Twice Potion",
+    "NAME": "Triplication Potion",
     "DESCRIPTIONS": [
-      "This turn, your next #b%1$d cards are played twice."
+      "This turn, your next #b%1$d cards are played thrice."
     ]
   },
   "${ModID}:FairyPotion": {

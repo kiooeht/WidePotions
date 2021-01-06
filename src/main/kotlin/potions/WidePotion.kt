@@ -176,7 +176,6 @@ open class WidePotion(
             DistilledChaosPotion.POTION_ID,
             LiquidMemories.POTION_ID,
             SwiftPotion.POTION_ID,
-            DuplicationPotion.POTION_ID,
             CunningPotion.POTION_ID,
             EssenceOfDarkness.POTION_ID,
             PotionOfCapacity.POTION_ID,
@@ -194,6 +193,7 @@ open class WidePotion(
             SmokeBomb.POTION_ID to WideSmokeBomb(),
             GamblersBrew.POTION_ID to WideGamblersBrew(),
             RegenPotion.POTION_ID to WideRegenPotion(),
+            DuplicationPotion.POTION_ID to WideDuplicationPotion(),
         )
     }
 }
