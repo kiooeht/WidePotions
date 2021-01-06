@@ -26,7 +26,7 @@ object UpgradedDiscovery {
         fun Postfix(
             __result: ArrayList<AbstractCard>,
             __instance: DiscoveryAction,
-            type: AbstractCard.CardType
+            type: AbstractCard.CardType?
         ): ArrayList<AbstractCard> {
             if (__instance.upgradeCards) {
                 __result.forEach(AbstractCard::upgrade)
