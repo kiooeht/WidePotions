@@ -29,6 +29,7 @@ import com.megacrit.cardcrawl.localization.RelicStrings
 import com.megacrit.cardcrawl.localization.UIStrings
 import com.megacrit.cardcrawl.relics.PotionBelt
 import com.megacrit.cardcrawl.relics.Sozu
+import com.megacrit.cardcrawl.relics.ToyOrnithopter
 import com.megacrit.cardcrawl.relics.WhiteBeast
 import com.megacrit.cardcrawl.saveAndContinue.SaveFileObfuscator
 import org.apache.logging.log4j.LogManager
@@ -223,6 +224,7 @@ class WidePotionsMod :
             WideRelics.replaceRelic(PotionBelt.ID, true)
         }
         WideRelics.replaceRelic(WhiteBeast.ID, true)
+        WideRelics.replaceRelic(ToyOrnithopter.ID, true)
 
         BaseMod.addSaveField<List<Boolean>?>(makeID("IsWide"), object : CustomSavable<List<Boolean>?> {
             override fun onSave(): List<Boolean>? {

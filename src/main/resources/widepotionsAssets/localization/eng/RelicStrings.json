@@ -5,6 +5,7 @@
     "DESCRIPTIONS": []
   },
   "${ModID}:Toy Ornithopter": {
+    "NAME": "Wide Toy Ornithopter",
     "DESCRIPTIONS": [
       " NL If the potion is #yWide [REMOVE_SPACE], heal an additional #b%1$d HP."
     ]
