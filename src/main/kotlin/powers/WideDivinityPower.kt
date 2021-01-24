@@ -37,16 +37,18 @@ class WideDivinityPower(
     object Patch {
         @JvmStatic
         fun Postfix(__instance: DivinityStance) {
-            AbstractDungeon.actionManager.addToBottom(
-                RemoveSpecificPowerAction(
-                    AbstractDungeon.player,
-                    AbstractDungeon.player,
-                    POWER_ID
+            if (AbstractDungeon.player?.hasPower(POWER_ID) == true) {
+                AbstractDungeon.actionManager.addToBottom(
+                    RemoveSpecificPowerAction(
+                        AbstractDungeon.player,
+                        AbstractDungeon.player,
+                        POWER_ID
+                    )
                 )
-            )
-            AbstractDungeon.actionManager.addToBottom(
-                ChangeStanceAction(DivinityStance.STANCE_ID)
-            )
+                AbstractDungeon.actionManager.addToBottom(
+                    ChangeStanceAction(DivinityStance.STANCE_ID)
+                )
+            }
         }
     }
 
