@@ -1,0 +1,21 @@
+{
+  "${ModID}:WideDivinity": {
+    "NAME": "神-格",
+    "DESCRIPTIONS": [
+      "你的下个回合开始时，进入 #y神格 。"
+    ]
+  },
+  "${ModID}:WideRegen": {
+    "NAME": "再-生",
+    "DESCRIPTIONS": [
+      "在你的回合结束时，回复 #b%1$d 点 #y生命 ，然后并失去 #b%2$d 层。"
+    ]
+  },
+  "${ModID}:TriplicationPower": {
+    "NAME": "复读",
+    "DESCRIPTIONS": [
+      "本回合你的下一张牌将打出三次。",
+      "本回合你的下 #b%1$d 张牌将打出三次。"
+    ]
+  }
+}

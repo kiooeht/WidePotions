@@ -1,0 +1,24 @@
+{
+  "${ModID}:RightHalf": {
+    "NAME": "",
+    "FLAVOR": "",
+    "DESCRIPTIONS": []
+  },
+  "${ModID}:Toy Ornithopter": {
+    "NAME": "玩-具-扑-翼-飞-机",
+    "DESCRIPTIONS": [
+      " NL 如果 #y宽大药水 [REMOVE_SPACE] ，再回复 #b%1$d 点生命。"
+    ]
+  },
+  "${ModID}:Potion Belt": {
+    "NAME": "药-水-腰-带",
+    "FLAVOR": "穿上这条腰带，我就能携带更多药水！",
+    "DESCRIPTIONS": [
+      "拾起时，获得 #b%1$d 个药水栏位。"
+    ]
+  },
+  "${ModID}:White Beast Statue": {
+    "NAME": "百-兽-雕-像",
+    "FLAVOR": "一个小小的白色雕像，这种动物你从来没有见过。"
+  }
+}

@@ -1,0 +1,75 @@
+{
+  "${ModID}:WidePotion": {
+    "NAME": "宽大 %1$s"
+  },
+  "${ModID}:Weak Potion": {
+    "DESCRIPTIONS": [
+      "给予所有敌人 #b%1$d 层 #y虚弱 。"
+    ]
+  },
+  "${ModID}:FearPotion": {
+    "DESCRIPTIONS": [
+      "给予所有敌人 #b%1$d 层 #y易伤 。"
+    ]
+  },
+  "${ModID}:BlessingOfTheForge": {
+    "NAME": "神化药水",
+    "DESCRIPTIONS": [
+      "本场战斗升级所有牌。"
+    ]
+  },
+  "${ModID}:DuplicationPotion": {
+    "NAME": "复读药水",
+    "DESCRIPTIONS": [
+      "本回合，你的下 #b%1$d 张牌将打出三次。"
+    ]
+  },
+  "${ModID}:FairyPotion": {
+    "NAME": "瓶中精灵皇后"
+  },
+  "${ModID}:SneckoOil": {
+    "NAME": "太异蛇油"
+  },
+  "${ModID}:AttackPotion": {
+    "DESCRIPTIONS": [
+      "从 #b3 张随机已 #y升级 的 #y攻击牌 中选择 #b1 张并将其 #b%1$d 张复制品加入你的手牌。它们在本回合耗能变为 #b0 。"
+    ]
+  },
+  "${ModID}:SkillPotion": {
+    "DESCRIPTIONS": [
+      "从 #b3 张随机已 #y升级 的 #y技能牌 中选择 #b1 张并将其 #b%1$d 张复制品加入你的手牌。它们在本回合耗能变为 #b0 。"
+    ]
+  },
+  "${ModID}:PowerPotion": {
+    "DESCRIPTIONS": [
+      "从 #b3 张随机已 #y升级 的 #y能力牌 中选择 #b1 张并将其 #b%1$d 张复制品加入你的手牌。它们在本回合耗能变为 #b0 。"
+    ]
+  },
+  "${ModID}:ColorlessPotion": {
+    "DESCRIPTIONS": [
+      "从 #b3 张随机已 #y升级 的 #y无色牌 中选择 #b1 张并将其 #b%1$d 张复制品加入你的手牌。它们在本回合耗能变为 #b0 。"
+    ]
+  },
+  "${ModID}:Ambrosia": {
+    "DESCRIPTIONS": [
+      "进入 #y神格 。NL 你的下回合开始时，进入 #y神格 。"
+    ]
+  },
+  "${ModID}:SmokeBomb": {
+    "DESCRIPTIONS": [
+      "从一场非Boss战斗中逃离，获得奖励。"
+    ]
+  },
+  "${ModID}:GamblersBrew": {
+    "DESCRIPTIONS": [
+      "#y预见 #b%1$d 。 NL 丢弃任意张牌，然后抽相同数量的牌。"
+    ]
+  },
+  "${ModID}:Regen Potion": {
+    "DESCRIPTIONS": [
+      "获得 #b%1$d 层 #y再-生 。",
+      "再-生",
+      "再-生会在你的回合结束时回复生命。每回合，再-生失去 #b%1$d 层。"
+    ]
+  }
+}

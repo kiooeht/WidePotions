@@ -248,6 +248,7 @@ class WidePotionsMod :
 
     private fun makeLocPath(language: Settings.GameLanguage, filename: String): String {
         val langPath = when (language) {
+            Settings.GameLanguage.ZHS -> "zhs"
             else -> "eng"
         }
         return assetPath("localization/$langPath/$filename.json")
