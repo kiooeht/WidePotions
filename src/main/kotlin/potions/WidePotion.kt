@@ -94,6 +94,10 @@ open class WidePotion(
         return potion.canUse()
     }
 
+    protected fun AbstractPotion_canUse(): Boolean {
+        return super.canUse()
+    }
+
     override fun canDiscard(): Boolean {
         return potion.canDiscard()
     }
