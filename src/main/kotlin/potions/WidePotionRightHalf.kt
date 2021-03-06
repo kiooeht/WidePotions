@@ -25,7 +25,8 @@ class WidePotionRightHalf(
 
     override fun getPotency(ascensionLevel: Int): Int = 0
 
-    override fun makeCopy(): AbstractPotion? = null
+    override fun makeCopy(): AbstractPotion =
+        WidePotionRightHalf(otherHalf)
 
     override fun adjustPosition(slot: Int) {}
 
