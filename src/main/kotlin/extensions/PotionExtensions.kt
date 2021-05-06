@@ -22,3 +22,11 @@ fun AbstractPotion.makeWide(): AbstractPotion {
     }
     throw NullPointerException()
 }
+
+fun AbstractPotion.unWide(): AbstractPotion? {
+    return if (this is IsWidePotion) {
+        this.unWide()
+    } else {
+        this
+    }
+}

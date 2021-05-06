@@ -153,6 +153,10 @@ open class WidePotion(
         }
     }
 
+    override fun unWide(): AbstractPotion? {
+        return potion.makeCopy()
+    }
+
     companion object {
         private fun makeID(id: String): String =
             id
