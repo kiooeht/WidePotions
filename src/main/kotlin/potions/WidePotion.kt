@@ -136,7 +136,9 @@ open class WidePotion(
 
         potion.slot = slot
 
-        AbstractDungeon.player.obtainPotion(potionSlot + 1, otherHalf)
+        if (potionSlot + 1 < AbstractDungeon.player.potions.size) {
+            AbstractDungeon.player.obtainPotion(potionSlot + 1, otherHalf)
+        }
     }
 
     override fun adjustPosition(slot: Int) {

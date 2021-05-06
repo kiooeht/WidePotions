@@ -16,7 +16,7 @@ object DestroyBothWide {
         val potion = AbstractDungeon.player.potions[slot]
         if (potion.isWide()) {
             val otherSlot = potion.slot + 1
-            if (otherSlot >= 0) {
+            if (otherSlot >= 0 && otherSlot < AbstractDungeon.player.potions.size) {
                 AbstractDungeon.player.potions[otherSlot] = PotionSlot(otherSlot)
             }
         }
