@@ -1,11 +1,12 @@
 package com.evacipated.cardcrawl.mod.widepotions.patches
 
-import com.evacipated.cardcrawl.mod.widepotions.extensions.isWide
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch
 import com.megacrit.cardcrawl.core.Settings
 import com.megacrit.cardcrawl.potions.AbstractPotion
+import com.megacrit.cardcrawl.relics.AbstractRelic
 import com.megacrit.cardcrawl.rewards.RewardItem
 import javassist.expr.ExprEditor
+import javassist.expr.FieldAccess
 import javassist.expr.MethodCall
 
 @SpirePatch(
@@ -19,16 +20,23 @@ object WideRewardPosition {
             override fun edit(m: MethodCall) {
                 if (m.className == AbstractPotion::class.qualifiedName && m.methodName == "move") {
                     m.replace(
-                        "if (${WideRewardPosition::class.qualifiedName}.isWide(\$0)) {" +
+                        "if (${RenderWide::class.qualifiedName}.isWide(\$0)) {" +
                                 "\$1 -= 24 * ${Settings::class.qualifiedName}.scale;" +
                                 "}" +
                                 "\$_ = \$proceed(\$\$);"
                     )
                 }
             }
-        }
 
-    @JvmStatic
-    fun isWide(potion: AbstractPotion): Boolean =
-        potion.isWide()
+            override fun edit(f: FieldAccess) {
+                if (f.isWriter && f.className == AbstractRelic::class.qualifiedName && (f.fieldName == "currentX" || f.fieldName == "targetX")) {
+                    f.replace(
+                        "if (${RenderWide::class.qualifiedName}.isWide(\$0)) {" +
+                                "\$1 -= 10 * ${Settings::class.qualifiedName}.scale;" +
+                                "}" +
+                                "\$proceed(\$\$);"
+                    )
+                }
+            }
+        }
 }
