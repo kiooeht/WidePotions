@@ -2,8 +2,11 @@ package com.evacipated.cardcrawl.mod.widepotions.patches
 
 import com.evacipated.cardcrawl.mod.widepotions.extensions.isWide
 import com.evacipated.cardcrawl.mod.widepotions.extensions.unWide
+import com.evacipated.cardcrawl.mod.widepotions.extensions.widepotions
 import com.evacipated.cardcrawl.mod.widepotions.potions.WidePotionRightHalf
+import com.evacipated.cardcrawl.mod.widepotions.potions.WidePotionSlot
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch
+import com.evacipated.cardcrawl.modthespire.lib.SpireReturn
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon
 import com.megacrit.cardcrawl.potions.PotionSlot
 import com.megacrit.cardcrawl.ui.panels.TopPanel
@@ -14,7 +17,12 @@ import com.megacrit.cardcrawl.ui.panels.TopPanel
 )
 object DestroyBothWide {
     @JvmStatic
-    fun Prefix(__instance: TopPanel, slot: Int) {
+    fun Prefix(__instance: TopPanel, slot: Int): SpireReturn<Void> {
+        if (slot < 0) {
+            AbstractDungeon.player.widepotions[-slot - 1] = WidePotionSlot(slot)
+            return SpireReturn.Return()
+        }
+
         val potion = AbstractDungeon.player.potions[slot]
         if (potion.isWide()) {
             val otherSlot = potion.slot + 1
@@ -26,5 +34,7 @@ object DestroyBothWide {
                 AbstractDungeon.player.obtainPotion(potion.otherHalf.slot, it)
             }
         }
+
+        return SpireReturn.Continue()
     }
 }

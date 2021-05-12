@@ -2,6 +2,11 @@
   "${ModID}:WidePotion": {
     "NAME": "Wide %1$s"
   },
+  "${ModID}:Potion Slot": {
+    "DESCRIPTIONS": [
+      " NL Can only hold a #yWide potion."
+    ]
+  },
   "${ModID}:Weak Potion": {
     "DESCRIPTIONS": [
       "Apply #b%1$d #yWeak to ALL enemies."

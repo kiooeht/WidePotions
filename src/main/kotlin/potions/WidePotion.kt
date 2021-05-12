@@ -136,15 +136,26 @@ open class WidePotion(
 
         potion.slot = slot
 
-        if (potionSlot + 1 < AbstractDungeon.player.potions.size) {
+        if (potionSlot >= 0 && potionSlot + 1 < AbstractDungeon.player.potions.size) {
             AbstractDungeon.player.obtainPotion(potionSlot + 1, otherHalf)
         }
     }
 
     override fun adjustPosition(slot: Int) {
-        super.adjustPosition(slot)
+        super.adjustPosition(
+            if (slot < 0) {
+                (-slot - 1) * 2 + (AbstractDungeon.player?.potions?.size ?: 0)
+            } else {
+                slot
+            }
+        )
 
-        hb.move(TopPanel.potionX + (slot + 0.5f) * Settings.POTION_W, posY)
+        val slotPosition = if (slot < 0) {
+            AbstractDungeon.player.potions.size + (-slot - 1) * 2
+        } else {
+            slot
+        }
+        hb.move(TopPanel.potionX + (slotPosition + 0.5f) * Settings.POTION_W, posY)
     }
 
     private fun fixDoubleWhatMod() {

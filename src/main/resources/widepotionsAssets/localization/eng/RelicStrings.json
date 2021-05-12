@@ -14,7 +14,7 @@
     "NAME": "Wide Potion Belt",
     "FLAVOR": "I can hold even more Potions using this belt!",
     "DESCRIPTIONS": [
-      "Upon pickup, gain #b%1$d Potion slots."
+      "Upon pickup, gain #b%1$d Potion slot and #b%2$d #yWide Potion slot."
     ]
   },
   "${ModID}:White Beast Statue": {

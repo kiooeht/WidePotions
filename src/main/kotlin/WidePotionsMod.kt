@@ -11,9 +11,12 @@ import com.badlogic.gdx.graphics.Pixmap
 import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.graphics.g2d.Gdx2DPixmap
 import com.codedisaster.steamworks.SteamUser
+import com.evacipated.cardcrawl.mod.widepotions.extensions.canBeWide
 import com.evacipated.cardcrawl.mod.widepotions.extensions.isWide
 import com.evacipated.cardcrawl.mod.widepotions.extensions.makeWide
+import com.evacipated.cardcrawl.mod.widepotions.extensions.widepotions
 import com.evacipated.cardcrawl.mod.widepotions.potions.WidePotion
+import com.evacipated.cardcrawl.mod.widepotions.potions.WidePotionSlot
 import com.evacipated.cardcrawl.mod.widepotions.relics.WideRelics
 import com.evacipated.cardcrawl.modthespire.lib.SpireConfig
 import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer
@@ -22,6 +25,7 @@ import com.megacrit.cardcrawl.core.Settings
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon
 import com.megacrit.cardcrawl.helpers.FontHelper
 import com.megacrit.cardcrawl.helpers.ImageMaster
+import com.megacrit.cardcrawl.helpers.PotionHelper
 import com.megacrit.cardcrawl.integrations.steam.SteamIntegration
 import com.megacrit.cardcrawl.localization.PotionStrings
 import com.megacrit.cardcrawl.localization.PowerStrings
@@ -241,6 +245,39 @@ class WidePotionsMod :
                             AbstractDungeon.player.potions[i].initializeData()
                         }
                     }
+                }
+            }
+        })
+
+        BaseMod.addSaveField<List<String?>?>(makeID("widepotions"), object : CustomSavable<List<String?>?> {
+            override fun onSave(): List<String?>? {
+                return AbstractDungeon.player?.widepotions
+                    ?.map { p ->
+                        if (p is WidePotionSlot) {
+                            null
+                        } else {
+                            p.ID
+                        }
+                    }
+            }
+
+            override fun onLoad(save: List<String?>?) {
+                if (save != null) {
+                    for (i in save.indices) {
+                        val potionId = save[i]
+                        if (potionId != null && PotionHelper.isAPotion(potionId)) {
+                            val potion = PotionHelper.getPotion(potionId)
+                            if (potion.canBeWide()) {
+                                val widePotion = potion.makeWide()
+                                AbstractDungeon.player.widepotions.add(widePotion)
+                                widePotion.setAsObtained(i)
+                                continue
+                            }
+                        }
+                        // fallback
+                        AbstractDungeon.player.widepotions.add(WidePotionSlot(-i - 1))
+                    }
+                    AbstractDungeon.player.adjustPotionPositions()
                 }
             }
         })
