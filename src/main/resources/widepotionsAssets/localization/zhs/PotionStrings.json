@@ -2,6 +2,11 @@
   "${ModID}:WidePotion": {
     "NAME": "宽大 %1$s"
   },
+  "${ModID}:Potion Slot": {
+    "DESCRIPTIONS": [
+      " NL 只能有一个 #y宽大 药水栏位。"
+    ]
+  },
   "${ModID}:Weak Potion": {
     "DESCRIPTIONS": [
       "给予所有敌人 #b%1$d 层 #y虚弱 。"
