@@ -270,7 +270,7 @@ class WidePotionsMod :
                             if (potion.canBeWide()) {
                                 val widePotion = potion.makeWide()
                                 AbstractDungeon.player.widepotions.add(widePotion)
-                                widePotion.setAsObtained(i)
+                                widePotion.setAsObtained(-i - 1)
                                 continue
                             }
                         }
