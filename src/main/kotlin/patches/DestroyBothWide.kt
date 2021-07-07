@@ -19,7 +19,10 @@ object DestroyBothWide {
     @JvmStatic
     fun Prefix(__instance: TopPanel, slot: Int): SpireReturn<Void> {
         if (slot < 0) {
-            AbstractDungeon.player.widepotions[-slot - 1] = WidePotionSlot(slot)
+            val index = -slot - 1
+            if (index >= 0 && index < AbstractDungeon.player.widepotions.size) {
+                AbstractDungeon.player.widepotions[index] = WidePotionSlot(slot)
+            }
             return SpireReturn.Return()
         }
 
