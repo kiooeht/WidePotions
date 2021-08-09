@@ -30,26 +30,17 @@ class WideDivinityPower(
         description = DESCRIPTIONS[0]
     }
 
-    @SpirePatch(
-        clz = DivinityStance::class,
-        method = "atStartOfTurn"
-    )
-    object Patch {
-        @JvmStatic
-        fun Postfix(__instance: DivinityStance) {
-            if (AbstractDungeon.player?.hasPower(POWER_ID) == true) {
-                AbstractDungeon.actionManager.addToBottom(
-                    RemoveSpecificPowerAction(
-                        AbstractDungeon.player,
-                        AbstractDungeon.player,
-                        POWER_ID
-                    )
-                )
-                AbstractDungeon.actionManager.addToBottom(
-                    ChangeStanceAction(DivinityStance.STANCE_ID)
-                )
-            }
-        }
+    override fun atStartOfTurn() {
+        AbstractDungeon.actionManager.addToBottom(
+            RemoveSpecificPowerAction(
+                owner,
+                owner,
+                this
+            )
+        )
+        AbstractDungeon.actionManager.addToBottom(
+            ChangeStanceAction(DivinityStance.STANCE_ID)
+        )
     }
 
     @SpirePatches(
