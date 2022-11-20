@@ -2,10 +2,13 @@ package com.evacipated.cardcrawl.mod.widepotions
 
 import basemod.*
 import basemod.abstracts.CustomSavable
+import basemod.abstracts.CustomSavableRaw
 import basemod.devcommands.ConsoleCommand
 import basemod.interfaces.EditStringsSubscriber
 import basemod.interfaces.PostDungeonInitializeSubscriber
 import basemod.interfaces.PostInitializeSubscriber
+import basemod.patches.com.megacrit.cardcrawl.saveAndContinue.SaveFile.ModSaves
+import basemod.patches.com.megacrit.cardcrawl.saveAndContinue.SaveFile.ModSaves.modPotionSaves
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.Pixmap
 import com.badlogic.gdx.graphics.Texture
@@ -238,11 +241,25 @@ class WidePotionsMod :
 
             override fun onLoad(save: List<Boolean>?) {
                 if (save != null) {
+                    val modPotionSaves: ModSaves.ArrayListOfJsonElement? = modPotionSaves[CardCrawlGame.saveFile]
                     for (i in 0 until min(save.size, AbstractDungeon.player.potions.size)) {
                         if (save[i]) {
                             AbstractDungeon.player.potions[i] = AbstractDungeon.player.potions[i].makeWide()
-                            AbstractDungeon.player.potions[i].setAsObtained(i)
-                            AbstractDungeon.player.potions[i].initializeData()
+                            val wide = AbstractDungeon.player.potions[i]
+                            if (WidePotion.whitemap.containsKey(wide.ID)) {
+                                // is complex potion, check for CustomSavable
+                                if (wide is CustomSavableRaw) {
+                                    wide.onLoadRaw(
+                                        if (modPotionSaves == null || i >= modPotionSaves.size) {
+                                            null
+                                        } else {
+                                            modPotionSaves[i]
+                                        }
+                                    )
+                                }
+                            }
+                            wide.setAsObtained(i)
+                            wide.initializeData()
                         }
                     }
                 }
