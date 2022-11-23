@@ -8,7 +8,6 @@ import basemod.interfaces.EditStringsSubscriber
 import basemod.interfaces.PostDungeonInitializeSubscriber
 import basemod.interfaces.PostInitializeSubscriber
 import basemod.patches.com.megacrit.cardcrawl.saveAndContinue.SaveFile.ModSaves
-import basemod.patches.com.megacrit.cardcrawl.saveAndContinue.SaveFile.ModSaves.modPotionSaves
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.Pixmap
 import com.badlogic.gdx.graphics.Texture
@@ -23,6 +22,7 @@ import com.evacipated.cardcrawl.mod.widepotions.potions.WidePotionSlot
 import com.evacipated.cardcrawl.mod.widepotions.relics.WideRelics
 import com.evacipated.cardcrawl.modthespire.lib.SpireConfig
 import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer
+import com.google.gson.JsonElement
 import com.megacrit.cardcrawl.core.CardCrawlGame
 import com.megacrit.cardcrawl.core.Settings
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon
@@ -119,6 +119,11 @@ class WidePotionsMod :
         fun whitelistComplexPotion(potionID: String, potion: WidePotion) {
             WidePotion.whitemap.putIfAbsent(potionID, potion)
         }
+
+        private data class WidePotionSaveData(
+            val id: String?,
+            val json: JsonElement?,
+        )
     }
 
     override fun receivePostInitialize() {
@@ -241,21 +246,20 @@ class WidePotionsMod :
 
             override fun onLoad(save: List<Boolean>?) {
                 if (save != null) {
-                    val modPotionSaves: ModSaves.ArrayListOfJsonElement? = modPotionSaves[CardCrawlGame.saveFile]
+                    val modPotionSaves: ModSaves.ArrayListOfJsonElement? = ModSaves.modPotionSaves[CardCrawlGame.saveFile]
                     for (i in 0 until min(save.size, AbstractDungeon.player.potions.size)) {
                         if (save[i]) {
                             AbstractDungeon.player.potions[i] = AbstractDungeon.player.potions[i].makeWide()
                             val wide = AbstractDungeon.player.potions[i]
+                            val jsonElement = if (modPotionSaves == null || i >= modPotionSaves.size) {
+                                null
+                            } else {
+                                modPotionSaves[i]
+                            }
                             if (WidePotion.whitemap.containsKey(wide.ID)) {
                                 // is complex potion, check for CustomSavable
                                 if (wide is CustomSavableRaw) {
-                                    wide.onLoadRaw(
-                                        if (modPotionSaves == null || i >= modPotionSaves.size) {
-                                            null
-                                        } else {
-                                            modPotionSaves[i]
-                                        }
-                                    )
+                                    wide.onLoadRaw(jsonElement)
                                 }
                             }
                             wide.setAsObtained(i)
@@ -266,26 +270,44 @@ class WidePotionsMod :
             }
         })
 
-        BaseMod.addSaveField<List<String?>?>(makeID("widepotions"), object : CustomSavable<List<String?>?> {
-            override fun onSave(): List<String?>? {
+        BaseMod.addSaveField<List<String?>?>(makeID("widepotions"), object : CustomSavable<List<WidePotionSaveData>?> {
+            override fun onSave(): List<WidePotionSaveData>? {
                 return AbstractDungeon.player?.widepotions
                     ?.map { p ->
-                        if (p is WidePotionSlot) {
+                        val id = if (p is WidePotionSlot) {
                             null
                         } else {
                             p.ID
                         }
+                        val json = if (p is CustomSavableRaw) {
+                            p.onSaveRaw()
+                        } else {
+                            null
+                        }
+                        WidePotionSaveData(id, json)
                     }
             }
 
-            override fun onLoad(save: List<String?>?) {
+            override fun onLoad(save: List<WidePotionSaveData>?) {
                 if (save != null) {
                     for (i in save.indices) {
-                        val potionId = save[i]
-                        if (potionId != null && PotionHelper.isAPotion(potionId)) {
-                            val potion = PotionHelper.getPotion(potionId)
+                        val data = save[i]
+                        if (PotionHelper.isAPotion(data.id)) {
+                            val potion = PotionHelper.getPotion(data.id)
+                            if (WidePotion.whitelist.contains(potion.ID)) {
+                                // is simple potion, check for CustomSavable
+                                if (potion is CustomSavableRaw) {
+                                    potion.onLoadRaw(data.json)
+                                }
+                            }
                             if (potion.canBeWide()) {
                                 val widePotion = potion.makeWide()
+                                if (WidePotion.whitemap.containsKey(widePotion.ID)) {
+                                    // is complex potion, check for CustomSavable
+                                    if (widePotion is CustomSavableRaw) {
+                                        widePotion.onLoadRaw(data.json)
+                                    }
+                                }
                                 AbstractDungeon.player.widepotions.add(widePotion)
                                 widePotion.setAsObtained(-i - 1)
                                 continue
