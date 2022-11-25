@@ -1,6 +1,7 @@
 package com.evacipated.cardcrawl.mod.widepotions.potions
 
 import basemod.patches.whatmod.WhatMod
+import com.evacipated.cardcrawl.mod.stslib.patches.FlavorText
 import com.evacipated.cardcrawl.mod.widepotions.WidePotionsMod
 import com.evacipated.cardcrawl.mod.widepotions.extensions.getPrivate
 import com.evacipated.cardcrawl.mod.widepotions.extensions.setPrivateFinal
@@ -35,6 +36,13 @@ open class WidePotion(
         liquidColor = potion.liquidColor
         hybridColor = potion.hybridColor
         spotsColor = potion.spotsColor
+        // stslib flavor text color fields
+        FlavorText.PotionFlavorFields.boxColor[this] = FlavorText.PotionFlavorFields.boxColor[potion]
+        FlavorText.PotionFlavorFields.textColor[this] = FlavorText.PotionFlavorFields.textColor[potion]
+        FlavorText.PotionFlavorFields.flavorBoxType[this] = FlavorText.PotionFlavorFields.flavorBoxType[potion]
+        FlavorText.PotionFlavorFields.boxTop[this] = FlavorText.PotionFlavorFields.boxTop[potion]
+        FlavorText.PotionFlavorFields.boxMid[this] = FlavorText.PotionFlavorFields.boxMid[potion]
+        FlavorText.PotionFlavorFields.boxBot[this] = FlavorText.PotionFlavorFields.boxBot[potion]
 
         initialized = true
         val potionStrings = LocalizedStrings::class.getPrivate<Map<String, PotionStrings>>("potions")
